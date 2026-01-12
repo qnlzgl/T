@@ -1,0 +1,133 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+def load_and_preprocess(filepath):
+    """
+    Loads the CSV, converts timestamps, and handles missing data.
+    """
+    df = pd.read_csv(filepath)
+    df['Timestamp'] = pd.to_datetime(df['Timestamp'])
+    df = df.sort_values('Timestamp').set_index('Timestamp')
+    
+    # Forward fill missing VWAP values to handle gaps in futures data
+    df['VWAP'] = df['VWAP'].ffill()
+    df = df.dropna()
+    
+    # Calculate log returns (or simple pct_change)
+    df['Returns'] = df['VWAP'].pct_change()
+    return df
+
+def backtest_strategy(df, signal_col, strategy_name):
+    """
+    Vectorized backtest engine.
+    CRITICAL: Shifts signal by 1 to avoid look-ahead bias.
+    """
+    data = df.copy()
+    
+    # Execution Logic:
+    # Signal at time 't' (close of bar) triggers trade at time 't+1'
+    data['Position'] = data[signal_col].shift(1)
+    
+    # Calculate Strategy Returns
+    data['Strategy_Returns'] = data['Position'] * data['Returns']
+    
+    # Cumulative Returns for Equity Curve
+    data['Cumulative_Market'] = (1 + data['Returns']).cumprod()
+    data['Cumulative_Strategy'] = (1 + data['Strategy_Returns']).cumprod()
+    
+    # --- Statistics ---
+    # Annualization Factor: 
+    # Assumes ~252 trading days. We calculate average bars per day dynamically.
+    daily_counts = data.groupby(data.index.date).count()['VWAP']
+    avg_bars_per_day = daily_counts.mean()
+    ann_factor = np.sqrt(252 * avg_bars_per_day)
+    
+    # Sharpe Ratio
+    mean_ret = data['Strategy_Returns'].mean()
+    std_ret = data['Strategy_Returns'].std()
+    
+    sharpe = 0
+    if std_ret > 0:
+        sharpe = (mean_ret / std_ret) * ann_factor
+        
+    total_return = data['Cumulative_Strategy'].iloc[-1] - 1
+    
+    print(f"--- {strategy_name} ---")
+    print(f"Sharpe Ratio: {sharpe:.2f}")
+    print(f"Total Return: {total_return * 100:.2f}%")
+    print(f"Final Equity: {data['Cumulative_Strategy'].iloc[-1]:.4f}\n")
+    
+    return data['Cumulative_Strategy']
+
+def main():
+    # 1. Load Data
+    file_path = 'CLc1-vwap-2025.csv'
+    df = load_and_preprocess(file_path)
+    
+    # -------------------------------------------
+    # Strategy 1: Donchian Channel Breakout (Trend Following)
+    # -------------------------------------------
+    # Logic: Long if Price > Max(Last 10 bars), Short if Price < Min(Last 10 bars)
+    # 10 bars = 5 hours (30 min bars)
+    n = 10
+    
+    # Calculate rolling Highs and Lows (Shifted by 1 to use PAST data only for signal generation)
+    # Note: .shift(1) here puts the "Previous N bars" value at the current row index.
+    df['RollingMax'] = df['VWAP'].rolling(window=n).max().shift(1)
+    df['RollingMin'] = df['VWAP'].rolling(window=n).min().shift(1)
+    
+    # Generate Signals
+    df['Signal_Donchian'] = np.nan
+    df.loc[df['VWAP'] > df['RollingMax'], 'Signal_Donchian'] = 1  # Breakout Up
+    df.loc[df['VWAP'] < df['RollingMin'], 'Signal_Donchian'] = -1 # Breakout Down
+    
+    # Forward fill signal to hold the position until a reverse signal occurs
+    df['Signal_Donchian'] = df['Signal_Donchian'].ffill().fillna(0)
+    
+    # -------------------------------------------
+    # Strategy 2: Moving Average Crossover (Trend Following)
+    # -------------------------------------------
+    # Logic: Long if Fast MA > Slow MA
+    short_window = 5
+    long_window = 20
+    
+    df['SMA_Short'] = df['VWAP'].rolling(window=short_window).mean()
+    df['SMA_Long'] = df['VWAP'].rolling(window=long_window).mean()
+    
+    df['Signal_MA'] = 0
+    df.loc[df['SMA_Short'] > df['SMA_Long'], 'Signal_MA'] = 1
+    df.loc[df['SMA_Short'] < df['SMA_Long'], 'Signal_MA'] = -1
+
+    # -------------------------------------------
+    # Run Backtests
+    # -------------------------------------------
+    print("Backtesting Results:\n")
+    
+    curve_donchian = backtest_strategy(df, 'Signal_Donchian', 'Donchian Breakout (10)')
+    curve_ma = backtest_strategy(df, 'Signal_MA', 'MA Crossover (5, 20)')
+    
+    # Market Baseline
+    curve_market = (1 + df['Returns']).cumprod()
+    print(f"--- Market Benchmark ---")
+    print(f"Total Return: {(curve_market.iloc[-1] - 1) * 100:.2f}%\n")
+
+    # -------------------------------------------
+    # Plotting
+    # -------------------------------------------
+    plt.figure(figsize=(14, 7))
+    plt.plot(df.index, curve_market, label='Market (Buy & Hold)', color='gray', alpha=0.5, linestyle='--')
+    plt.plot(df.index, curve_ma, label='MA Crossover (5, 20)', color='blue', alpha=0.7)
+    plt.plot(df.index, curve_donchian, label='Donchian Breakout (10)', color='green', linewidth=2)
+    
+    plt.title('Cumulative Returns: Intraday Strategies (WTI 2025)')
+    plt.ylabel('Equity (Normalized to 1)')
+    plt.xlabel('Date')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig('strategy_performance.png')
+    # plt.show() # Uncomment if running locally with a display
+
+if __name__ == "__main__":
+    main()
