@@ -1,0 +1,73 @@
+Rolling Horizon Signal Accumulation Strategy (Baseline)
+
+Objective
+	•	Test whether LLM-extracted bullish / bearish signals from research articles can be converted into a simple, systematic trading framework for commodity futures.
+
+⸻
+
+Signal Construction
+	•	Each research article is parsed by LLM into:
+	•	Asset (commodity future)
+	•	Direction: bullish (+1) or bearish (−1)
+	•	Forecast horizon: [t_{start}, t_{end}]
+
+⸻
+
+Horizon Normalization
+	•	To avoid long-dated signals mechanically dominating exposure:
+	•	Each signal is assigned a unit total weight
+	•	Daily contribution is evenly distributed across its forecast horizon
+	•	For a signal with horizon length H days:
+	•	Daily weight = +1 / H (bullish) or −1 / H (bearish)
+
+⸻
+
+Position Aggregation
+	•	On each trading day:
+	•	Identify all active signals (current date ∈ forecast horizon)
+	•	Sum daily weights across all active signals to obtain raw position
+	•	Net position reflects accumulated directional conviction from research articles
+
+⸻
+
+Risk Control
+	•	Apply a hard position cap to prevent excessive exposure:
+	•	Position ∈ [−1, +1]
+	•	No leverage, no volatility scaling, no dynamic risk optimization
+
+⸻
+
+Execution Assumptions
+	•	Simple, conservative execution to isolate signal quality:
+	•	Trade at next-day open (or close)
+	•	Fixed notional exposure
+	•	No intraday timing or execution optimization
+
+⸻
+
+Key Design Principles
+	•	Emphasis on transparency and explainability
+	•	Avoid parameter tuning and overfitting
+	•	Framework designed as a research baseline, not a production strategy
+
+⸻
+
+Expected Outcome / Interpretation
+	•	Strategy tests structural signal quality, not trading sophistication
+	•	Suitable for evaluating whether article-derived signals:
+	•	Carry standalone alpha, or
+	•	Are better used as contextual / supporting inputs to other strategies
+
+⸻
+
+Known Limitations
+	•	Ignores regime dependency and conditional language in research articles
+	•	Treats all signals as equally reliable
+	•	Does not account for signal interaction or macro context
+
+⸻
+
+Conclusion
+	•	Provides a clean, conservative baseline to assess the feasibility of trading LLM-extracted research signals
+	•	Negative or weak results indicate structural limitations, not implementation issues
+	•	Helps determine whether further investment in this direction is justified
