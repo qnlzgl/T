@@ -1,0 +1,455 @@
+# “””
+SGP Oil KNN Intraday Strategy - Backtest
+
+Reproduces the logic from the screenshots:
+
+- Features: west_view, asia_view, diff_west_close, price_pos_*, weekday
+- Model: KNN (k=3) with NCA preprocessing
+- Target: asia_c = Asia close price - Decision time price
+- Trade: Enter at Decision time, Exit at Asia close
+- Long if prediction > 0, Short if prediction < 0
+
+Time references (all in UTC, adjust if your df is in UTC):
+WEST_OPEN_TIME  = 13:30 UTC (9:30pm SGT prev day ≈ NYC open equiv, but code uses SGT)
+
+Since your df index timezone may vary, we define sessions in SGT (UTC+8):
+ASIA_OPEN   = 08:00 SGT = 00:00 UTC
+DECISION    = 12:00 SGT = 04:00 UTC
+ASIA_CLOSE  = 18:00 SGT = 10:00 UTC
+WEST_OPEN   = 21:00 SGT = 13:00 UTC  (prev day, i.e. NYC open)
+WEST_CLOSE  = 05:00 SGT = 21:00 UTC  (prev day, i.e. NYSE overnight close)
+
+Usage:
+import pandas as pd
+df = pd.read_parquet(“your_data.parquet”)  # index=Time, cols: Price, Asset, Contract, trading_day, Nearby
+from sgp_oil_knn_backtest import run_backtest
+results = run_backtest(df)
+“””
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+from matplotlib.ticker import FuncFormatter
+import warnings
+warnings.filterwarnings(‘ignore’)
+
+from sklearn.neighbors import KNeighborsClassifier, NeighborhoodComponentsAnalysis
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+# ─── CONFIG ────────────────────────────────────────────────────────────────────
+
+ASIA_OPEN_TIME   = (8,  0)   # SGT HH:MM
+DECISION_TIME    = (12, 0)   # SGT - when we decide to trade
+ASIA_CLOSE_TIME  = (18, 0)   # SGT - exit time
+WEST_OPEN_TIME   = (21, 0)   # SGT previous day (NYC open)
+WEST_CLOSE_TIME  = (5,  0)   # SGT same morning (NYC close / early morning)
+
+PRICE_POS_LOOKBACKS = [5, 10, 20]   # rolling windows for price_pos features
+KNN_NEIGHBORS       = 3
+TRAIN_WINDOW        = 252           # rolling training window (trading days)
+MIN_TRAIN_DAYS      = 60            # minimum days before first prediction
+ASIA_PRICE_STD      = 0.5           # threshold to convert asia_c to categorical signal
+TRANSACTION_COST    = 0.02          # $/bbl round trip (optional, set 0 to ignore)
+
+# ───────────────────────────────────────────────────────────────────────────────
+
+def localize_to_sgt(df: pd.DataFrame) -> pd.DataFrame:
+“”“Ensure index is in SGT (UTC+8). Handles tz-aware and tz-naive.”””
+idx = df.index
+if idx.tz is None:
+# Assume UTC if naive
+df = df.copy()
+df.index = idx.tz_localize(‘UTC’).tz_convert(‘Asia/Singapore’)
+else:
+df = df.copy()
+df.index = idx.tz_convert(‘Asia/Singapore’)
+return df
+
+def get_price_at(df_day: pd.DataFrame, hh: int, mm: int) -> float:
+“”“Get price at specific time on a day’s df (already filtered to that date).”””
+target = df_day.index[df_day.index.hour == hh]
+target = target[target.minute == mm]
+if len(target) > 0:
+val = df_day.loc[target[0], ‘Price’]
+return val if pd.notna(val) else np.nan
+# Fall back: nearest available
+candidates = df_day[
+(df_day.index.hour * 60 + df_day.index.minute) >= hh * 60 + mm
+]
+if len(candidates) > 0:
+return candidates[‘Price’].iloc[0]
+return np.nan
+
+def build_daily_features(df: pd.DataFrame) -> pd.DataFrame:
+“””
+Construct daily feature table from minute data.
+
+```
+Features per trading day d:
+    west_s       : price at WEST_OPEN_TIME on day d-1
+    west_e       : price at WEST_CLOSE_TIME on day d   (early morning)
+    west_view    : west_e - west_s  (overnight NYC session)
+    asia_s       : price at ASIA_OPEN_TIME on day d-1
+    asia_e       : price at ASIA_CLOSE_TIME on day d-1
+    asia_view    : asia_e - asia_s  (yesterday's Asia session)
+    ref_price    : price at DECISION_TIME on day d
+    asia_close   : price at ASIA_CLOSE_TIME on day d  (target exit)
+    diff_west_close : ref_price - west_e
+    asia_c       : asia_close - ref_price  (TARGET)
+    week         : isoweekday (1=Mon, 5=Fri; skip 6,7)
+"""
+df = localize_to_sgt(df)
+
+# Get unique trading dates from the data
+dates = sorted(df.index.normalize().unique())
+
+records = []
+
+for i in range(1, len(dates)):
+    today = dates[i].date()
+    prev  = dates[i-1].date()
+    
+    df_today = df[df.index.date == today]
+    df_prev  = df[df.index.date == prev]
+    
+    if len(df_today) == 0 or len(df_prev) == 0:
+        continue
+    
+    week = pd.Timestamp(today).isoweekday()
+    if week in (6, 7):  # skip weekends
+        continue
+    
+    # West session: prev day WEST_OPEN → today early morning WEST_CLOSE
+    west_s = get_price_at(df_prev, *WEST_OPEN_TIME)
+    west_e = get_price_at(df_today, *WEST_CLOSE_TIME)
+    
+    # Asia session yesterday
+    asia_s = get_price_at(df_prev, *ASIA_OPEN_TIME)
+    asia_e = get_price_at(df_prev, *ASIA_CLOSE_TIME)
+    
+    # Decision time today
+    ref_price  = get_price_at(df_today, *DECISION_TIME)
+    
+    # Target: Asia close today
+    asia_close = get_price_at(df_today, *ASIA_CLOSE_TIME)
+    
+    row = {
+        'date':       today,
+        'week':       week,
+        'west_s':     west_s,
+        'west_e':     west_e,
+        'west_view':  west_e - west_s if pd.notna(west_e) and pd.notna(west_s) else np.nan,
+        'asia_s':     asia_s,
+        'asia_e':     asia_e,
+        'asia_view':  asia_e - asia_s if pd.notna(asia_e) and pd.notna(asia_s) else np.nan,
+        'ref_price':  ref_price,
+        'asia_close': asia_close,
+        'diff_west_close': ref_price - west_e if pd.notna(ref_price) and pd.notna(west_e) else np.nan,
+        'asia_c':     asia_close - ref_price if pd.notna(asia_close) and pd.notna(ref_price) else np.nan,
+    }
+    records.append(row)
+
+daily = pd.DataFrame(records).set_index('date')
+
+# Price position features: ref_price / rolling_mean(west_e, N)
+for lb in PRICE_POS_LOOKBACKS:
+    daily[f'west_close_avg_{lb}'] = daily['west_e'].rolling(lb).mean()
+    daily[f'price_pos_{lb}']      = daily['ref_price'] / daily[f'west_close_avg_{lb}']
+
+# Weekday dummies
+for d in range(1, 6):
+    daily[f'week_{d}'] = (daily['week'] == d).astype(int)
+
+# Convert asia_c to categorical signal: +1, -1, 0
+daily['asia_c_cat'] = daily['asia_c'].apply(
+    lambda x: 1 if x > ASIA_PRICE_STD else (-1 if x < -ASIA_PRICE_STD else 0)
+)
+
+return daily
+```
+
+def run_rolling_knn(daily: pd.DataFrame) -> pd.DataFrame:
+“””
+Rolling-window KNN prediction.
+For each day i >= MIN_TRAIN_DAYS:
+- Train on days [max(0, i-TRAIN_WINDOW) : i]
+- Predict day i
+“””
+feature_cols = (
+[‘west_view’, ‘asia_view’, ‘diff_west_close’]
++ [f’price_pos_{lb}’ for lb in PRICE_POS_LOOKBACKS]
++ [f’week_{d}’ for d in range(1, 6)]
+)
+
+```
+daily = daily.copy().dropna(subset=feature_cols + ['asia_c_cat'])
+daily = daily.reset_index()
+
+predictions = []
+
+for i in range(MIN_TRAIN_DAYS, len(daily)):
+    train_start = max(0, i - TRAIN_WINDOW)
+    train_df    = daily.iloc[train_start:i]
+    test_row    = daily.iloc[[i]]
+    
+    X_train = train_df[feature_cols].values
+    y_train = train_df['asia_c_cat'].values
+    X_test  = test_row[feature_cols].values
+    
+    if len(np.unique(y_train)) < 2:
+        predictions.append({'date': daily.iloc[i]['date'], 'knn_pred': 0})
+        continue
+    
+    try:
+        nca   = NeighborhoodComponentsAnalysis(random_state=42)
+        knn   = KNeighborsClassifier(n_neighbors=KNN_NEIGHBORS)
+        model = Pipeline([('nca', nca), ('knn', knn)])
+        
+        scaler  = StandardScaler()
+        X_train_s = scaler.fit_transform(X_train)
+        X_test_s  = scaler.transform(X_test)
+        
+        model.fit(X_train_s, y_train)
+        pred = model.predict(X_test_s)[0]
+    except Exception:
+        pred = 0
+    
+    predictions.append({'date': daily.iloc[i]['date'], 'knn_pred': pred})
+
+pred_df = pd.DataFrame(predictions).set_index('date')
+result  = daily.set_index('date').join(pred_df, how='inner')
+result  = result.dropna(subset=['knn_pred', 'asia_c'])
+
+return result
+```
+
+def compute_pnl(result: pd.DataFrame) -> pd.DataFrame:
+“””
+PnL calculation:
+- Signal = knn_pred (1=long, -1=short, 0=flat)
+- Enter at ref_price (decision time)
+- Exit at asia_close
+- Daily PnL = signal * (asia_close - ref_price) - |signal| * transaction_cost
+“””
+result = result.copy()
+result[‘signal’]    = result[‘knn_pred’]
+result[‘raw_pnl’]   = result[‘signal’] * result[‘asia_c’]
+result[‘tc’]        = result[‘signal’].abs() * TRANSACTION_COST
+result[‘daily_pnl’] = result[‘raw_pnl’] - result[‘tc’]
+result[‘cum_pnl’]   = result[‘daily_pnl’].cumsum()
+
+```
+# Position sizing: 1 lot = 1000 bbl (WTI futures)
+result['daily_pnl_usd'] = result['daily_pnl'] * 1000
+result['cum_pnl_usd']   = result['daily_pnl_usd'].cumsum()
+
+return result
+```
+
+def compute_stats(result: pd.DataFrame) -> dict:
+pnl = result[‘daily_pnl’]
+n   = len(pnl)
+ann = 252
+
+```
+stats = {
+    'Total Days':        n,
+    'Win Rate':          f"{(pnl > 0).mean()*100:.1f}%",
+    'Avg Daily PnL':     f"${pnl.mean()*1000:,.0f}",
+    'Total PnL':         f"${pnl.sum()*1000:,.0f}",
+    'Ann. Return':       f"${pnl.mean()*1000*ann:,.0f}/yr",
+    'Daily Vol':         f"${pnl.std()*1000:,.0f}",
+    'Sharpe Ratio':      f"{pnl.mean()/pnl.std()*np.sqrt(ann):.2f}",
+    'Max Drawdown':      f"${(result['cum_pnl_usd'] - result['cum_pnl_usd'].cummax()).min():,.0f}",
+    'Long %':            f"{(result['signal'] == 1).mean()*100:.1f}%",
+    'Short %':           f"{(result['signal'] == -1).mean()*100:.1f}%",
+    'Flat %':            f"{(result['signal'] == 0).mean()*100:.1f}%",
+}
+return stats
+```
+
+def plot_results(result: pd.DataFrame, stats: dict):
+“”“Plot cumulative PnL, rolling Sharpe, and signal distribution.”””
+
+```
+fig = plt.figure(figsize=(16, 12), facecolor='#0d1117')
+gs  = gridspec.GridSpec(3, 2, figure=fig, hspace=0.45, wspace=0.35)
+
+ax1 = fig.add_subplot(gs[0, :])   # full width: cumulative PnL
+ax2 = fig.add_subplot(gs[1, 0])   # rolling Sharpe
+ax3 = fig.add_subplot(gs[1, 1])   # monthly returns heatmap
+ax4 = fig.add_subplot(gs[2, 0])   # daily PnL distribution
+ax5 = fig.add_subplot(gs[2, 1])   # signal breakdown
+
+for ax in [ax1, ax2, ax3, ax4, ax5]:
+    ax.set_facecolor('#161b22')
+    ax.tick_params(colors='#8b949e', labelsize=9)
+    ax.spines[:].set_color('#30363d')
+
+idx = pd.to_datetime(result.index)
+cum = result['cum_pnl_usd'].values
+dd  = result['cum_pnl_usd'] - result['cum_pnl_usd'].cummax()
+
+# ── 1. Cumulative PnL with drawdown shading ──────────────────────────────
+ax1.fill_between(idx, dd.values, 0, alpha=0.3, color='#f85149', label='Drawdown')
+ax1.plot(idx, cum, color='#58a6ff', lw=1.5, label='Cum PnL (1 lot)')
+ax1.axhline(0, color='#30363d', lw=0.8)
+ax1.set_title('Cumulative PnL — SGP Oil KNN Intraday Strategy', 
+              color='#e6edf3', fontsize=13, fontweight='bold', pad=10)
+ax1.set_ylabel('USD (1 lot = 1000 bbl)', color='#8b949e', fontsize=9)
+ax1.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f'${x:,.0f}'))
+ax1.legend(facecolor='#161b22', edgecolor='#30363d', labelcolor='#8b949e', fontsize=9)
+
+# Stats box
+stats_text = '  |  '.join([f"{k}: {v}" for k, v in stats.items()])
+ax1.text(0.01, 0.03, stats_text, transform=ax1.transAxes,
+         color='#8b949e', fontsize=7.5, va='bottom',
+         bbox=dict(facecolor='#0d1117', edgecolor='#30363d', alpha=0.8, pad=4))
+
+# ── 2. Rolling Sharpe (63-day) ────────────────────────────────────────────
+roll_sharpe = (
+    result['daily_pnl'].rolling(63).mean() /
+    result['daily_pnl'].rolling(63).std() * np.sqrt(252)
+)
+ax2.plot(idx, roll_sharpe.values, color='#3fb950', lw=1.2)
+ax2.axhline(0, color='#30363d', lw=0.8)
+ax2.axhline(1, color='#3fb950', lw=0.6, linestyle='--', alpha=0.5)
+ax2.set_title('Rolling 63-day Sharpe', color='#e6edf3', fontsize=11)
+ax2.set_ylabel('Sharpe', color='#8b949e', fontsize=9)
+
+# ── 3. Monthly returns heatmap ────────────────────────────────────────────
+result_copy = result.copy()
+result_copy.index = pd.to_datetime(result_copy.index)
+monthly = result_copy['daily_pnl_usd'].resample('ME').sum()
+pivot = monthly.copy()
+pivot.index = pd.MultiIndex.from_arrays(
+    [pivot.index.year, pivot.index.month]
+)
+try:
+    pivot_2d = pivot.unstack(level=1)
+    pivot_2d.columns = ['Jan','Feb','Mar','Apr','May','Jun',
+                         'Jul','Aug','Sep','Oct','Nov','Dec'][:len(pivot_2d.columns)]
+    im = ax3.imshow(pivot_2d.values, aspect='auto', cmap='RdYlGn',
+                    vmin=-np.abs(pivot_2d.values).max(),
+                    vmax=np.abs(pivot_2d.values).max())
+    ax3.set_xticks(range(len(pivot_2d.columns)))
+    ax3.set_xticklabels(pivot_2d.columns, rotation=45, color='#8b949e', fontsize=8)
+    ax3.set_yticks(range(len(pivot_2d.index)))
+    ax3.set_yticklabels(pivot_2d.index, color='#8b949e', fontsize=8)
+    for (r, c), val in np.ndenumerate(pivot_2d.values):
+        if not np.isnan(val):
+            ax3.text(c, r, f'{val/1000:.0f}k', ha='center', va='center',
+                     fontsize=7, color='white' if abs(val) > pivot_2d.values[~np.isnan(pivot_2d.values)].std() else '#8b949e')
+except Exception:
+    ax3.text(0.5, 0.5, 'Monthly\nHeatmap', transform=ax3.transAxes,
+             color='#8b949e', ha='center', va='center')
+ax3.set_title('Monthly PnL Heatmap (USD)', color='#e6edf3', fontsize=11)
+
+# ── 4. Daily PnL distribution ─────────────────────────────────────────────
+pnl_vals = result['daily_pnl_usd'].dropna().values
+ax4.hist(pnl_vals, bins=60, color='#58a6ff', alpha=0.7, edgecolor='none')
+ax4.axvline(0, color='#f85149', lw=1)
+ax4.axvline(pnl_vals.mean(), color='#3fb950', lw=1.2, linestyle='--', label=f'Mean: ${pnl_vals.mean():,.0f}')
+ax4.set_title('Daily PnL Distribution', color='#e6edf3', fontsize=11)
+ax4.set_xlabel('USD / day', color='#8b949e', fontsize=9)
+ax4.legend(facecolor='#161b22', edgecolor='#30363d', labelcolor='#8b949e', fontsize=9)
+
+# ── 5. Signal breakdown ───────────────────────────────────────────────────
+sig_counts = result['signal'].value_counts().sort_index()
+colors_sig = {-1: '#f85149', 0: '#8b949e', 1: '#3fb950'}
+bars = ax5.bar(
+    [str(int(s)) for s in sig_counts.index],
+    sig_counts.values,
+    color=[colors_sig.get(int(s), '#58a6ff') for s in sig_counts.index],
+    width=0.5
+)
+ax5.set_title('Signal Distribution (Short / Flat / Long)', color='#e6edf3', fontsize=11)
+ax5.set_ylabel('Count', color='#8b949e', fontsize=9)
+for bar, val in zip(bars, sig_counts.values):
+    ax5.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+             str(val), ha='center', va='bottom', color='#8b949e', fontsize=9)
+ax5.set_xticklabels(['-1 (Short)', '0 (Flat)', '+1 (Long)'], color='#8b949e')
+
+plt.suptitle('SGP Oil KNN Strategy — Backtest Results', 
+             color='#e6edf3', fontsize=15, fontweight='bold', y=1.01)
+
+plt.savefig('/mnt/user-data/outputs/sgp_oil_knn_backtest.png',
+            dpi=150, bbox_inches='tight', facecolor='#0d1117')
+plt.show()
+print("Plot saved to sgp_oil_knn_backtest.png")
+```
+
+def run_backtest(df: pd.DataFrame, plot: bool = True) -> pd.DataFrame:
+“””
+Main entry point.
+
+```
+Args:
+    df: DataFrame with index=Time (datetime), columns: Price, Asset, Contract, trading_day, Nearby
+    plot: Whether to plot results
+
+Returns:
+    result: Daily DataFrame with signals, PnL, and all features
+"""
+print("Step 1/3: Building daily features from minute data...")
+daily = build_daily_features(df)
+print(f"  → {len(daily)} trading days constructed")
+
+print("Step 2/3: Running rolling KNN predictions...")
+result = run_rolling_knn(daily)
+print(f"  → {len(result)} days with predictions")
+
+print("Step 3/3: Computing PnL...")
+result = compute_pnl(result)
+
+stats = compute_stats(result)
+print("\n=== STRATEGY STATISTICS ===")
+for k, v in stats.items():
+    print(f"  {k:<20} {v}")
+
+if plot:
+    plot_results(result, stats)
+
+return result
+```
+
+# ─── EXAMPLE USAGE ─────────────────────────────────────────────────────────────
+
+if **name** == “**main**”:
+“””
+Replace this with your actual data loading:
+
+```
+df = pd.read_parquet("wti_minutes.parquet")
+# or
+df = pd.read_csv("wti_minutes.csv", index_col=0, parse_dates=True)
+
+results = run_backtest(df)
+results.to_csv("backtest_results.csv")
+"""
+
+print("Generating synthetic demo data for illustration...")
+np.random.seed(42)
+
+# Synthetic WTI-like minute data: 2022-08 to 2025-09
+dates = pd.date_range('2022-08-01', '2025-09-30', freq='B')  # business days
+
+records = []
+price = 89.0
+for d in dates:
+    # Simulate a day's worth of key minutes
+    for h, m in [(0,0),(5,0),(8,0),(12,0),(18,0),(21,0)]:
+        ts = pd.Timestamp(d.year, d.month, d.day, h, m, 
+                          tzinfo=pd.Timestamp.now(tz='Asia/Singapore').tzinfo)
+        price += np.random.randn() * 0.3
+        records.append({'Time': ts, 'Price': price, 'Asset': 'WTI',
+                         'Contract': 'V22', 'trading_day': d.date(), 'Nearby': 1.0})
+
+df_demo = pd.DataFrame(records).set_index('Time')
+
+results = run_backtest(df_demo, plot=True)
+print("\nResults head:")
+print(results[['signal', 'ref_price', 'asia_close', 'daily_pnl', 'cum_pnl']].tail(10))
+```
