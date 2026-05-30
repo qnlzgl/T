@@ -1,0 +1,975 @@
+Quantum Queen MT5  4.97
+ Experts   Bogdan Ion Puscasu
+ Version: 3.65  Updated: 27 May 2026  Activations: 10
+Hello, traders! I am Quantum Queen, the crown jewel of the entire Quantum ecosystem and the highest-rated, best-selling Expert Advisor in the history of MQL5. With a proven track record of over 20 months of live trading, I’ve earned my place as the undisputed Queen of XAUUSD.
+
+My specialty? GOLD.
+
+My mission? Deliver consistent, precise, intelligent trading results — over and over again.
+
+IMPORTANT! After the purchase please send me a private message to receive the installation manual and the setup instructions.
+Discounted price .  The price will increase by $50 with every 10 purchases. Final price $1999
+Live Signal IC Markets: CLICK HERE
+
+Live Signal VT Markets: CLICK HERE
+
+Quantum Queen mql5 public channel: CLICK HERE
+
+The lighter and more affordable version of Quantum Queen: Quantum Athena
+
+***Buy Quantum Queen MT5 and you could get Quantum Emperor or Quantum Baron for free !*** Ask in private for more details!
+
+
+
+Why Traders Call Me the Best GOLD EA Ever Created
+
+I’m the next-generation trading engine, crafted with precision, vision, and years of real market experience. Traders all over the world trust me because I’m built differently:
+
+12 advanced built-in strategies, each designed for a different market condition, working together like a perfectly synchronized machine. When one strategy sleeps, another awakens — ensuring I always adapt intelligently.
+4 different sets to choose from, each customised for 4 different brokers (VT Markets/IC Markets RAW - Medium Risk,  VT Markets/IC Markets RAW - Low Risk, Roboforex ECN, Fusion Zero)
+The elite trend-following grid system that doesn’t chase noise — it captures structured momentum and builds positions with intention, not randomness.
+15+ years of real trading expertise baked into my logic, giving me the instincts of a seasoned trader combined with the discipline of an algorithm.
+A complete, unwavering focus on quality over quantity — my signature strength that allows me to stay patient, avoid unnecessary trades, and strike only when the market truly aligns.
+I don’t trade for the sake of trading. I don’t gamble. I don’t guess.
+
+I wait. I analyze. And when the probabilities line up… I strike with precision, often turning a single move into an entire sequence of calculated, profitable decisions.
+
+This is why my performance stands out above everything else on the marketplace — consistency, discipline, precision, and real, verifiable long-term results.
+
+
+
+How I Work — Smart, Precise, and Effortless
+
+I am designed to integrate seamlessly into any trader’s workflow, whether you’re a beginner or a seasoned professional. My goal is to remove complexity, eliminate guesswork, and trade with discipline that most humans struggle to maintain.
+
+Here’s how I operate:
+
+Plug & Play installation — simply attach me to your XAUUSD chart, choose your preferred risk level, and the recommended set and I take care of the rest. No headaches, no chaos, no endless fine-tuning.
+No complicated settings — all 12 strategies and internal logic are fully optimized. You don’t need to modify anything. I come “battle-ready,” straight out of the box.
+Multi-timeframe flexibility — I work flawlessly on any timeframe.
+24/5 market intelligence — I constantly monitor gold’s price behavior, volatility spikes, directional bias, and trend structure. When I detect the perfect alignment of probabilities, I execute with razor-sharp accuracy.
+I don’t flood your account with trades. I don’t chase noise. And I definitely don’t rely on luck.
+I trade when the market conditions match my strategic criteria, not when someone feels impatient.
+That’s why I don’t trade every day — and that’s exactly why my long-term results stand above the rest.
+
+Patience is my edge. Quality is my signature. Consistency is my legacy.
+Minimum requirements and recommendations
+
+Recommended brokers: VT MARKETS / FP TRADING or a broker with ECN/RAW/LOW spread type
+2 decimal price quota for GOLD. Quantum Queen is not compatible with brokers which offer a 3 decimal price quota for GOLD
+Minimum initial deposit: $500 in accounts with 1:500 leverage.
+Recommended initial deposit: $1000 in accounts with 1:500 leverage.
+Leverage at least 1:100, 1:500 recommended
+Account type: Hedging.
+Use a VPS for the EA to work 24/7 (Mandatory).
+
+Designed for Traders Who Want More
+
+My code is fast.
+My logic is battle-tested.
+My performance is proven in real live markets — not just backtests.
+
+Whether you’re a beginner or a seasoned trader, I bring you the most powerful, refined trading experience that is hard to match.
+
+Just set me up, let me do my job, and enjoy the results.
+I am Quantum Queen — and your gold trading will never be the same again. 
+
+DISCLAIMER:
+Trading foreign exchange and CFDs carries a high level of risk. Past performance is not indicative of future results. Please trade responsibly and test on a demo account first.
+Quantum Queen focuses on high quality setups, rather than blindly trading. It is not a high frequency trading system - it's the ultimate system that patiently waits and executes only when it sees the perfect market conditions. This means that there will be entire days with no trades at all and other days with higher trading activity, entirely depending on the market conditions - this behavior can also be seen in my live signal, in backtesting and in the reviews/feedback left by long-term users.
+The main priority Of Quantum Queen is capital preservation first - it does not execute risky trades, it only executes in the perfect moments.
+Trading with Quantum Queen requires you to be patient and don't expect high trading activity and to get rich fast - this is a professional tool made for people who know the value of money.
+
+
+Hello, I'm Quantum Queen, the ultimate Expert Advisor (EA) designed by a team with over 15 years of trading and EA development experience. Let me transform your trading experience with my unparalleled precision and performance.
+
+Master the Gold Market with My Expertise
+
+I specialize in trading Gold (XAUUSD) using a sophisticated grid strategy. But that's just the beginning. I simultaneously execute five powerful trading strategies, leveraging the reliability of RSI, ATR, and a suite of other renowned indicators to keep you ahead of the market.
+
+My Key Features:
+
+🔥 Multi-Strategy Mastery: I execute five strategies simultaneously, ensuring diversified and robust trading.
+
+📈 Smart Risk Management: I automatically adjust trading lot size based on your account balance, ensuring optimal risk levels for maximum growth.
+
+⏰ Holiday-Aware Trading: I halt trading during holiday seasons to protect your investments from unpredictable market conditions.
+
+🚫 Drawdown Defense: I incorporate a maximum drawdown level to safeguard your capital.
+
+Proven Performance:
+
+I’m not just theoretical—I've been backtested and optimized from 2018 to the present, delivering incredible results with a spotless track record of no losses.
+
+Why Choose Me?
+
+I’m not just an EA; I'm your strategic partner in conquering the gold market. Whether you're a seasoned trader or just starting, I provide the tools and confidence you need to trade smarter and more effectively.
+
+Join My Revolution Today!
+
+Step into the future of trading with me, Quantum Queen. Elevate your trading game, maximize your profits, and experience the peace of mind that comes with a trusted, high-performance EA.
+
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.07.03 15:30 #2  
+Excellent start for QQ, looking forward to more.
+Files:	
+IMG-20240703-WA004251w.jpg  74 kb
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.07.08 08:57 #3  
+Hello, friends!
+
+🚀 Quantum Queen is delivering incredible results! 🚀
+
+I’m thrilled to share the outstanding performance of Quantum Queen over the past 10 weeks of live trading.
+
+ This powerful EA has delivered an impressive 47% profit, all while maintaining a minimal drawdown of just 12%. 📈
+
+Quantum Queen's precision and efficiency are reflected in its 78% win rate, boasting 55 winning trades out of 70. 🥇 It’s consistently proven its ability to capture profitable trades, ensuring a robust and reliable trading experience.
+
+One of the standout features of Quantum Queen is its ability to secure maximum consecutive wins, achieving 13 consecutive victories. This consistency is coupled with an average holding time of only 4 hours, allowing you to capitalize on rapid market movements and optimize your trading potential. ⏳
+
+Check out the live signal page for Quantum Queen to see the real-time performance and results:
+
+ 📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats
+
+Don’t miss out on this golden opportunity to elevate your trading game. Quantum Queen is ready to become a valuable addition to your trading arsenal. 
+
+Get your Quantum Queen today! 👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller#description 
+
+ 
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.07.11 18:45 #4  
+Hello, friends!
+
+🚀 Quantum Queen strikes gold! 🚀
+
+After a short period of calm, Quantum Queen kicked in and booked amazing profits. A user just sent in a screenshot and is very satisfied with the results! 🏆
+
+Quantum Queen is specifically designed for trading GOLD (XAUUSD), offering unmatched precision and performance on any timeframe. With over 15 years of trading experience built into its design, Quantum Queen is your ultimate trading companion.
+
+But don't just take our word for it! Check out the live signal page for Quantum Queen to see the real-time performance and live trading results: 
+
+ 📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=history
+
+Quantum Queen boasts impressive stats, including high profits, low drawdown, and a remarkable win rate. It’s consistently proven its ability to capture profitable trades, ensuring a robust and reliable trading experience.
+
+Don’t miss out on this golden opportunity to elevate your trading game. Quantum Queen is ready to become a valuable addition to your trading arsenal. 
+
+Get your Quantum Queen today! 
+
+👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller
+
+Wishing you profitable trades and continuous success in the markets!
+
+ 
+wheretogo13
+337
+wheretogo13 2024.07.12 10:21 #5  
+I am happy to share the initial results of QQ since my purchase. As you can see, the bot is booking profits. Remember, it uses a trend-following grid strategy, so don't be concerned by the negative positions—those are part of the strategy. Overall, QQ is booking profit.
+
+I recommend QQ to anyone looking to diversify their trading tools. The support provided by the developer is top-notch, so don't hesitate. Go for it—you won't regret it.
+
+  
+George Lucian Cociu
+347
+George Lucian Cociu 2024.07.12 16:35 #6  
+ 
+
+
+
+I am thrilled with my $180 start-up profit after only 5 days of trading with Quantum Queen. I'll keep you informed regarding the performance.
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.07.17 14:58 #7  
+Hello, friends! 🌞
+
+Summer is here, and while many of you are enjoying the holidays and having fun on the beach, I've got some exciting news that will make your summer even better! 🎉
+
+For a limited time only, Quantum Emperor is available at the special Summer Sale price of just $999! 🌟 This is your chance to get the best rated and most sold EA on the MQL5 marketplace at an incredible price. Whether you're lounging by the pool, soaking up the sun, or simply relaxing, you can also be making profits with Quantum Emperor.
+
+Imagine enjoying your summer days knowing that your trading is in good hands, working for you in the background, making your trading experience smoother and more successful. 🏖💸
+
+Don't miss this fantastic opportunity to enhance your trading toolkit and make this summer truly rewarding! Take advantage of this amazing offer while it lasts, and let Quantum Emperor bring more sunshine to your financial goals. 🌊☀
+
+Quantum Emperor MT4 - https://www.mql5.com/en/market/product/103540?source=Site+Profile+Seller
+
+Quantum Emperor MT5 - https://www.mql5.com/en/market/product/103452?source=Site+Profile+Seller
+
+Happy trading and enjoy the summer! 🌴
+
+ 
+SB Crypt
+39
+SB Crypt 2024.07.20 04:57 #8  
+Hi Bogdan can you help me understand why this is occuring. Your live trading page displays last trade placed on the 18th of July as a win for $9.24. When i run a backtesting result for that day you can see this trade closes out as a loss. Your trade held for 8 minutes but this was held for 1hr. 
+
+ 
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.07.21 08:01 #9  
+ 
+
+
+
+In my second week of trading Quantum Queen, I made a total profit of $342,82 indicating the potential for greater success. Thank you, Bogdan, for such excellent products on the forex market.
+
+You are the best.
+
+Well done.
+
+I always come back with updates about transactions.🤑
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.07.22 16:40 #10  
+🚀 Quantum Queen delivers! 🚀
+
+A satisfied user recently sent in a screenshot showcasing his impressive profits made with Quantum Queen.
+
+🌟 This powerful Expert Advisor is specifically designed for trading GOLD (XAUUSD) 🥇, and it's built on over 15 years of trading experience. Quantum Queen offers unmatched precision and performance on any timeframe, making it a valuable addition to any trader's arsenal. 📈
+
+Quantum Queen's advanced algorithms and intelligent strategies ensure that you can maximize your trading potential while minimizing risk. 💡 With its plug-and-play functionality, you can simply attach it to your XAUUSD chart, set your desired risk level, and let it work its magic. ✨
+
+Check out the live signal page to see Quantum Queen in action and witness the live trading results for yourself: 
+
+ 📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=history
+
+This is a golden opportunity you don't want to miss! 🌟 Join the growing community of satisfied users and experience the incredible performance of Quantum Queen. 
+
+Get your copy today and elevate your trading game! 🚀
+
+https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller# 
+
+ 
+wheretogo13
+337
+wheretogo13 2024.07.23 14:59 #11  
+The Queen is doing an amazing job, with a shy start ..now the EA is booking nice profits, and is ruling the Gold "beast" market as a pro full time royalist:
+
+
+ 
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.07.28 22:45 #12  
+ 
+
+
+
+Great week!  Quantum Queen got me a profit of $218 with steady trading gains. Keep up this good work.
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.07.30 12:50 #13  
+Hello, friends!
+
+🔥 Quantum Queen is a game-changer! 🔥
+
+In just 13 weeks of live trading, Quantum Queen has delivered an impressive 59% profit. 📈 This powerful EA is designed specifically for trading GOLD (XAUUSD) and harnesses over 15 years of trading expertise to provide you with top-notch performance and reliability. With a win rate of over 75%, that's 80 winning trades out of 106 total. 
+Quantum Queen's advanced algorithms and intelligent strategies ensure that you can maximize your trading potential. Its plug-and-play functionality makes it easy to use—simply attach it to your XAUUSD chart, set your desired risk level, and watch it work its magic. ✨
+
+But don't just rely on my word! Check out the live signal page to see Quantum Queen in action and witness the live trading results for yourself: 
+
+📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats
+
+This is a golden opportunity you don't want to miss! 🌟 Join the growing community of satisfied users and experience the incredible performance of Quantum Queen. 
+
+Get your copy today and take your trading to the next level!  🚀 
+
+👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller 
+
+ 
+
+Glen Worsdell
+245
+Glen Worsdell 2024.07.31 16:05 #14  
+These are my trades since using QQ, a mix of low and very low risk.  I will try some fixed lots too.
+
+
+
+ 
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.08.01 18:54 #15  
+Dear, friends!
+
+🌟 Quantum Queen delivers! 🌟
+
+Look at these amazing results achieved by one of our users in just two trading days! 😍 
+
+Quantum Queen is designed specifically for trading GOLD (XAUUSD) and has quickly become a game-changer for many traders. With its advanced algorithms and intelligent strategies, Quantum Queen ensures you can maximize your trading potential.
+
+The screenshot says it all—Quantum Queen has proven itself in the market with impressive performance. 📈 Its plug-and-play functionality makes it easy to use: simply attach it to your XAUUSD chart, set your desired risk level, or use the fixed lots option and let it work its magic. ✨
+
+But don't just rely on my word! For more live stats and to see Quantum Queen in action, check out the signal page: 
+
+📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=account
+
+This is a golden opportunity you don't want to miss! 🌟 Join the growing community of satisfied users and experience the incredible performance of Quantum Queen. 
+
+Get your copy today and elevate your trading game! 🚀
+
+ 👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller#description 
+
+ 
+wheretogo13
+337
+wheretogo13 2024.08.03 14:42 #16  
+QQ results from 23.07 to 01.08
+ 
+George Lucian Cociu
+347
+George Lucian Cociu 2024.08.04 08:26 #17  
+ 
+
+
+
+In my first month of working with Quantum Queen, the results were much better than I had anticipated. I'm overjoyed with the $1826 earnings for July. This is the way.
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.08.08 22:24 #18  
+Hello, friends!
+
+Quantum StarMan's live signal has been running for over 10 months with steady profits! 🌟 Here are some impressive stats:
+
+over 70% profits in 10+ months of live trading: Quantum StarMan has consistently delivered significant returns, making it a reliable choice for traders looking to grow their accounts steadily. 📈
+84%+ win rate with 286 winning trades out of 340: This high win rate demonstrates the EA's ability to accurately predict market movements and execute profitable trades. 🏆
+Maximum consecutive wins: 28: Quantum StarMan has achieved up to 28 consecutive winning trades, showcasing its effectiveness and consistency in various market conditions. 🥇
+
+Check out the live trading signal to see the impressive performance in real-time. Transform your trading journey today!
+
+https://www.mql5.com/en/signals/2100889?source=Site+Signals+From+Author#!tab=account
+
+Quantum StarMan employs a sophisticated grid strategy designed to optimize your trading performance across six currency pairs. Unlike traditional Martingale systems, Quantum StarMan carefully manages risk by adapting to market conditions and strategically placing trades to maximize profits while minimizing drawdowns. This ensures consistent and reliable performance, even in volatile market environments. The grid strategy allows for multiple entry and exit points, providing flexibility and resilience against market fluctuations.
+
+And guess what? Quantum StarMan is currently on Summer Sale! 🌞 You can get it for just $399 for a limited time only. This special price won't last long, so take advantage of this offer while it lasts. Don’t miss out on this opportunity to enhance your trading strategy with a proven, high-performing EA.
+
+Ready to boost your trading game? Buy Quantum StarMan now!
+
+https://www.mql5.com/en/market/product/107189?source=Site+Profile+Seller 
+
+
+ 
+Kong Foo
+114
+Kong Foo 2024.08.13 15:15 #19  
+INCREDIBLE! It has already generated profitable operations and it is only the Second weeks that I have activated it. I already covered half of the cost of this EA. The EA is absurdly easy to install and with Bogdan's patience and advice you won't need anything else. The EA is amazing ..... 
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.08.16 09:58 #20  
+Hello, friends!
+
+🚀 Quantum Queen is crushing it! 🚀
+
+The live signal has been running strong for over 5 months, and the results are nothing short of spectacular! 
+
+🌟 Quantum Queen’s strategy is expertly designed to maximize profits while minimizing risks, making it an invaluable tool for traders of all levels. By combining grid trading with advanced algorithms, Quantum Queen adapts to market conditions, ensuring that you’re always in the best position to profit.
+
+Here’s what Quantum Queen has achieved in just over 5 months of live trading:
+
+📈 Over 71% profits in live trading: Quantum Queen has delivered consistent returns, accumulating more than 71% profit in just a little over 5 months. This impressive growth showcases the EA's ability to adapt and thrive in various market conditions, making it a reliable choice for traders looking to boost their portfolios.
+
+🏆 76%+ win rate with 107 winning trades out of 140 total trades: Quantum Queen has maintained a high win rate, successfully closing over 76% of its trades in profit. Out of 140 total trades, 107 have been winners, highlighting the precision and effectiveness of Quantum Queen’s strategy.
+
+🎯 14 consecutive wins showcasing remarkable consistency: One of the standout features of Quantum Queen is its ability to string together multiple consecutive winning trades. With 14 back-to-back wins, it’s clear that this EA is not only effective but also highly consistent, providing peace of mind for traders.
+
+⏱ Over 10 average trades per week: Quantum Queen is designed to keep your trading active and engaged, averaging more than 10 trades per week. By focusing on quality rather than quantity, Quantum Queen strikes the perfect balance between activity and precision. This approach allows you to take advantage of numerous market opportunities without the risk of overtrading.
+
+Quantum Queen is all about consistent, steady profits. With its smart risk management and adaptive strategies, it’s designed to keep your trading profitable and stress-free.
+
+See Quantum Queen’s impressive performance in real-time
+
+https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats
+
+If you’re looking to elevate your trading game, Quantum Queen is the way to go. Don’t miss out on this opportunity—get Quantum Queen today
+
+https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller 
+
+That is my new favourite Quantum EA tool ..with astonishing results so far from my account, from 03.08 until 16.08
+ 
+Jenny LK
+1993
+Jenny LK 2024.08.17 12:08 #22  
+ 
+
+
+
+QQ performance on Friday.
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.08.18 17:15 #23  
+ 
+
+
+
+For a summer week, the profit earned during the week of August 12–16. While I was sleeping, Queen generated her money, and everything is automated (the feature I enjoy the most, QQ).
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.08.20 11:38 #24  
+Hello, friends!
+
+🚀 Exciting news! Quantum StarMan has just been upgraded to version 3.1! This latest update changes the default settings, allowing the EA to trade all currency pairs simultaneously instead of just one pair at a time. This enhancement maximizes your trading opportunities and further leverages the power of Quantum StarMan's strategy. 🌟
+
+Quantum StarMan is not just any EA—it's the best multicurrency grid EA on the MQL5 marketplace. Designed specifically for traders who want to harness the full potential of grid trading across multiple currency pairs, Quantum StarMan stands out with its ability to balance risk and reward effectively. It’s a top performer because it doesn’t just focus on one pair—it strategically spreads your trades across multiple pairs, ensuring that you capture the best opportunities available in the market.
+
+Let’s dive into the impressive statistics from Quantum StarMan’s live trading performance:
+
+Over 84% win rate: With 301 winning trades out of 356, Quantum StarMan has proven its ability to consistently pick winning trades. 🏆
+
+Over 76% profit in just 11 months: This solid profit margin demonstrates the EA's capability to grow your account steadily and reliably over time. 📈
+
+Maximum consecutive wins: 28: Quantum StarMan has achieved a streak of 28 consecutive winning trades, highlighting its effectiveness in seizing market opportunities. 🥇
+
+Over 16 trades per week: On average, Quantum StarMan executes over 16 trades per week, keeping your account active and working towards your financial goals. 📊
+
+This upgrade to v3.1 makes Quantum StarMan even more powerful, as it now takes full advantage of its grid strategy by trading all pairs simultaneously by default. This means more opportunities for profit and a more dynamic trading experience overall.
+
+Check out our live trading signal to see these results in real time
+
+https://www.mql5.com/en/signals/2100889?source=Site+Signals+From+Author#!tab=stats
+
+Get Quantum StarMan today and take your trading to the highest possible level!
+
+🚀https://www.mql5.com/en/market/product/107189?source=Site+Profile+Seller 
+
+
+ 
+
+jeonse
+519
+jeonse 2024.08.22 03:32 #25  
+ 
+
+I've been running it for about a week.
+
+As expected, Bogdan EA is good!
+
+Stable growth, Quantum Queen seems to be a newer EA.
+
+If only this came out 10 years earlier...
+
+ 
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.08.26 05:14 #26  
+ 
+
+
+
+This week, I made $182.89 in profit from my Queen strategy trades. I look forward to building on this momentum in the future weeks!
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.08.27 12:28 #27  
+🔥 Quantum Queen is absolutely dominating the markets! 🔥
+
+Prepare to be blown away by the incredible results one of our users just shared! 😃 This EA is truly making waves, and the proof is right there in the screenshot.
+
+Quantum Queen is the best grid EA for trading gold (XAUUSD), expertly designed to maximize profits while keeping risk under control. The most powerful gold EA on the MQL5 marketplace combines advanced grid trading strategies with intelligent algorithms that adapt to changing market conditions. Whether the market is trending or ranging, Quantum Queen finds the perfect opportunities to enter and exit trades, ensuring consistent profitability.
+
+Brace yourself for some jaw-dropping stats from the live signal that’s been crushing the markets for 17 weeks straight!
+
+📈 Over 77% profits: Quantum Queen has delivered outstanding returns, growing accounts by more than 77% in just 17 weeks.
+
+🏆 75%+ win rate: With 118 winning trades out of 156 total trades, Quantum Queen has maintained a solid win rate, proving its effectiveness.
+
+🎯 14 consecutive wins: This EA has shown remarkable consistency, stringing together 14 consecutive winning trades.
+
+⏱ Over 7 average trades per week: Quantum Queen keeps you actively trading, with more than 7 trades per week on average, striking a great balance between activity and precision.
+
+Check out the live signal page to see Quantum Queen in action and review all the stats yourself:
+
+ 📊 https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats
+
+If you’re looking for a reliable and profitable trading solution for gold, Quantum Queen is the way to go. Don’t miss out on the opportunity to elevate your trading game and achieve these incredible results for yourself!
+
+🚀 Seize the moment—unleash the full power of Quantum Queen and watch your trading explode with success! Don’t wait—your winning streak starts NOW!
+
+👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller# 
+
+ 
+wheretogo13
+337
+wheretogo13 2024.09.01 12:50 #28  
+Quantum Queen is continuing to deliver amazing results, see the results from 20th to 27th August from my account.
+This is a trend following grid EA so the batches are always closed with profits, see the date and time and don't be put off by the loosing trades, are normal and part of the strategy, the EA will close a grid with profit each time:
+ 
+Nikesh Patel
+520
+Nikesh Patel 2024.09.06 09:54 #29  
+As one of the early buyers of QQ, I can confidently say that it has proven to be a stable and outstanding product, delivering consistent profits. It expertly identifies entry points and quickly secures gains. I own several of Bogdan's products, and this one is by far my favourite. After running it on a live account for six months, I plan to scale up to a much larger account. So far, I can say this is my top product.
+
+
+ 
+
+
+
+ 
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.09.06 10:21 #30  
+Hello, friends!
+
+🎉 You asked, and I listened—I’m extending the Quantum Emperor Giveaway to include all of you Quantum Queen customers too! 🎁✨ Now you can also join the fun and get your chance to win amazing prizes like an iPhone 15, 3 Sony Headsets, and 20 FREE Quantum EA licenses! 😍
+
+Here’s how you can get in on the action:
+
+1️⃣   Write a review for Quantum Queen.
+
+https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller#!tab=reviews
+
+2️⃣   Post your feedback with a few words about your Quantum Queen experience and a screenshot from the History tab in Metatrader, showing at least two weeks of recent profits, in the comments section of the EA.
+
+https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller#!tab=comments&page=2
+
+3️⃣   Send me a private message on MQL5 to submit your entries.
+
+The more entries you submit, the more chances you have to win! 🚀 The giveaway is extended until November 5th, and the winners will be announced on November 15th. This is your golden chance to win big and take your trading to the next level! 🏆
+
+I’m super excited to have all my Quantum Queen users join in! 🎊 Let’s make this giveaway the most exciting yet!
+
+Good luck to everyone! 🙌
+
+ 
+
+wheretogo13
+337
+wheretogo13 2024.09.06 12:19 #31  
+And the September's month start was excellent for our Quantum Queen, Her Majesty is definitely ruling the market, here are the results for 2-5 Sept week:
+
+Once again, I recommend this EA to everyone, if you will buy it ASAP you also can join the Competition published by the seller above and can win some amazing prizes.
+Happy Trading everyone!
+
+ 
+
+George Lucian Cociu
+347
+George Lucian Cociu 2024.09.06 20:36 #32  
+ 
+
+ 
+
+
+
+Trading with Queen has been a game-changer! A 31% return in two months is unbelievable, totaling $3,100. Bogdan, I’m excited to see what other products you have in the pipeline.
+
+Ya Peng Cheng
+293
+Ya Peng Cheng 2024.09.08 09:03 #33  
+ 
+
+recommend this EA. great return and balance between MDD, and win rate.
+
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.09.09 13:54 #34  
+🔥 Quantum Queen is on FIRE! 🔥
+
+The live signal has been running strong for 19 weeks, and the results are nothing short of mind-blowing!
+ 📈 Quantum Queen has delivered over 83% profits in less than 6 months! This EA is truly a game-changer, designed to help you maximize your gains while managing risks effectively.
+
+Quantum Queen’s strategy is built on advanced grid trading, perfectly suited for gold (XAUUSD) trading. Its intelligent algorithms identify the best opportunities, ensuring you’re always in a position to capture profits. 💡 By strategically entering and exiting trades, it takes advantage of market movements while maintaining strong risk management.
+
+Let’s dive into the live signal statistics:
+
+➡ Over 83% profits in just 19 weeks of live trading 🚀
+➡ 76%+ win rate with 133 winning trades out of 175 total trades 🏆
+➡ 14 consecutive wins, showcasing Quantum Queen’s ability to deliver consistent success ⚡
+➡ 14+ trades per week, keeping your trading active and engaged week after week 📊
+
+🎯 See Quantum Queen’s live results now: https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats  📊
+
+🚀 Get Quantum Queen today and experience this incredible trading power for yourself! 👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller#
+
+ 
+
+Thara Tantitaranukul
+1686
+Thara Tantitaranukul 2024.09.09 17:13 #35  
+Nice performance EA
+Files:	
+IMG_1330.jpeg  2004 kb
+Thara Tantitaranukul
+1686
+Thara Tantitaranukul 2024.09.09 17:25 #36  
+Thara Tantitaranukul #:
+Nice performance EA
+ 
+Quantum Queen
+ 
+
+
+
+
+Gerardo Armando Ochoa Aguilera
+11236
+Gerardo Armando Ochoa Aguilera 2024.09.10 01:26 #37  
+Hello, see below some results of last week. im using the minium settings and a small account, but so far so good. :)
+
+ 
+
+Gerardo Armando Ochoa Aguilera
+11236
+Gerardo Armando Ochoa Aguilera 2024.09.10 01:31 #38  
+Here more details of each trade of august. Remember, im using a low risk :). 
+
+ 
+
+Zhi Xian Lin
+338
+Zhi Xian Lin 2024.09.10 15:18 #39  
+ 
+
+I find the Quantum Queen EA very reliable, with stable profits so far, and Bogdan is very helpful in resolving any issues I've encountered.
+Kong Foo
+114
+Kong Foo 2024.09.11 10:36 #40  
+ 
+The QQ is Great EA ..... 
+
+As a trader ,I use both of  Queen and Emperor as well . It helps me a lot in this three months.
+
+
+
+
+Files:	
+Screenshot_20240911_224557_MetaTrader_5.jpg  441 kb
+Leong To Kam
+173
+Leong To Kam 2024.09.11 20:23 #42  
+ As a trader ,I use both of  Queen and Emperor as well . It helps me a lot in this three months.
+lememaxi
+76
+lememaxi 2024.09.12 22:33 #43  
+I've been using QQ for 3 weeks, amazing results! I started with the small deposit with a bit increased risk, extremely satisfied with the steady profits that are building up my account now. Keep going, Bogdan! Nice job you do
+
+ 
+
+wheretogo13
+337
+wheretogo13 2024.09.13 11:14 #44  
+The Queen is smashing the Gold market:
+(09-13.09....and the day is not over..lol)
+ 
+George Lucian Cociu
+347
+George Lucian Cociu 2024.09.16 06:19 #45  
+ 
+
+
+
+Big thanks to Queen EA for helping me secure a $704 profit this week. The automation really makes a difference!
+
+Tony32601
+99
+Tony32601 2024.09.20 00:04 #46  
+Huge thanks, Bogdan - I've been using QQ for over a month now and results are very consistent and steady. QQ doesn't trade every day but when it does, it's profitable. I'd rather have accurate and slow than inaccurate and fast. Please keep up the great work and making things consistent with growth. Much appreciate your efforts.
+
+ 
+
+ND001 Alfred
+50
+ND001 Alfred 2024.09.20 16:06 #47  
+All thanks to Mr Bogdan,I have been using QQ for over a month now and the profits has been very consistent.Its a very efficient EA and I can recommend.Keep the good work
+Files:	
+IMG_7986.png  282 kb
+IMG_7985.png  354 kb
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.09.24 12:20 #48  
+🚀 Quantum Queen is absolutely CRUSHING it! 🚀
+
+In just 21 weeks, Quantum Queen has delivered a jaw-dropping 93%+ profits—and it’s not slowing down! 💥 This best EA for trading gold (XAUUSD) on the MQL5 marketplace is  using a powerful grid strategy that adapts to market conditions, capturing every opportunity while minimizing risk. When market conditions are met, Quantum Queen is there, making precise, calculated trades that keep your profits flowing.
+
+Let’s dive into the numbers:
+
+➡ Over 93% profits in just 5 months of live trading—imagine what that could do for your account! 💸
+➡ 76%+ win rate, with 156 winning trades out of 205 total trades 🏆—this is consistency you can count on!
+➡ 14 consecutive wins—proving that Quantum Queen isn’t just lucky; it’s built to WIN! 🎯
+➡ 6+ trades per week—keeping your trading active, engaged, and rewarding with multiple opportunities to profit every week. ⚡
+
+Quantum Queen’s smart algorithm evaluates the market 24/7, ensuring that it spots golden opportunities and minimizes drawdowns. It’s like having a pro trader working for you around the clock, but better—no emotions, just solid performance and incredible results.
+
+💥 Check out the live signal page here to see Quantum Queen in action: 
+
+https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats 📊
+
+Want to feel the power of the best gold grid EA for yourself? Don’t miss your chance—Get Quantum Queen today and watch your trading soar to new heights!
+
+ 🚀 👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller 
+
+ 
+
+Christian Jordan
+578
+Christian Jordan 2024.09.25 14:48 #49  
+Ich habe Quantum Queen direkt gekauft als er veröffentlicht wurde. Musste dann aus gesundheitlichen Problemen aufhören. Jetzt läuft er wieder seit 2 Wochen top ea zum jetzigen Zeitpunkt 
+Files:	
+IMG_9683.jpeg  159 kb
+Jing2017
+1063
+Jing2017 2024.09.25 21:13 #50  
+Ganancias del 24-09-24 en cuenta Real de Icm 
+
+ 
+Jing2017
+1063
+Jing2017 2024.09.25 21:18 #51  
+Ganancias del 24-09-24 en cuenta Real de IcM
+
+ 
+Jing2017
+1063
+Jing2017 2024.09.25 21:19 #52  
+Ganancias del 20-09-24
+
+ 
+Jing2017
+1063
+Jing2017 2024.09.25 21:20 #53  
+Ganancias del 13-09-24
+
+ 
+Jing2017
+1063
+Jing2017 2024.09.25 21:22 #54  
+Ganancias del 12-09-24
+
+ 
+Jing2017
+1063
+Jing2017 2024.09.25 21:23 #55  
+Ganancias del 12-09-24
+
+ 
+TradeTrendz
+64
+TradeTrendz 2024.09.26 19:28 #56  
+ Bonjour à tous, voici un aperçu du travail accompli par la Reine dernière mois. Je suis très content. Merci Bogdan et continue comme ça !
+Files:	
+IMG_9795.png  345 kb
+Bogdan Ion Puscasu
+66639
+Bogdan Ion Puscasu 2024.09.27 11:01 #57  
+🔥 Quantum Queen SHATTERS the 100% Growth Barrier! 🔥
+
+Buckle up, traders, because Quantum Queen has officially crushed the 100% growth milestone—and it’s only getting started! 🚀 In just 22 weeks of live trading, this beast of an EA has delivered an eye-popping 100% growth and has maintained a 76%+ win rate, with 164 wins out of 216 trades. 📊
+
+But wait—there’s more! Quantum Queen is on a 14 consecutive win streak, consistently pulling in victory after victory. ⚡ And with 17+ trades per week, it’s keeping your account not just active—but thriving! 💸 This isn’t just an EA that sits back and waits—Quantum Queen seizes every opportunity to grow your portfolio, no matter the market conditions.
+
+What’s the secret behind Quantum Queen’s success?
+The best grid-based EA on the entire MQL5 marketplace specifically designed for trading gold (XAUUSD) combines sophisticated algorithms with a market-adaptive strategy. Whether the market is trending, ranging, or throwing wild swings, Quantum Queen knows exactly when to enter and exit, always seeking the best opportunities while keeping risk in check. It’s like having a seasoned trader working for you around the clock, but without the emotional decisions!
+
+📈 Here’s a quick recap of the jaw-dropping stats:
+
+💥 100% growth in just 22 weeks! 💰
+💥 76%+ win rate with 164 winning trades out of 216 🏆
+💥 14 consecutive wins, showcasing Quantum Queen’s consistency 🎯
+💥 17+ trades per week, keeping your account constantly engaged and in profit mode! ⚡
+
+📊 These results speak for themselves. You don’t want to be the one missing out while everyone else is cashing in on this winning streak!
+
+🚀 Check out the live signal now to see Quantum Queen in action:
+
+ ➡ https://www.mql5.com/en/signals/2234595?source=Site+Signals+My#!tab=stats
+
+⏳ Time is ticking— the price increases by $50 with every 10 purchases. Don’t miss your chance to join the winning side! Get Quantum Queen today and start stacking up your profits!
+
+ 👉 https://www.mql5.com/en/market/product/118805?source=Site+Profile+Seller 
+
+ 
+
+Ferran Lopez Navarro
+3419
+Ferran Lopez Navarro 2024.09.27 14:45 #58  
+ 
+
+Results since I had it
+
+wheretogo13
+337
+wheretogo13 2024.09.27 15:07 #59  
+Queen results 16-26.09.24, is a must have tool for any trader, beginner or advanced.
+
+ 
+
+ 
+
+ 
+
+Kong Foo
+114
+Kong Foo 2024.09.28 09:25 #60  
+The QQ result from July until 28th Sept.....    
+
+
+'ve been using QQ for over a month now. I've never felt this calm while running any EA. It wakes up, does its job, and then goes back to a well-deserved nap. The results for the latter part of April were +13%, and May closed at +22% using the High Risk settings. I'm looking forward to seeing what comes next. Highly recommended!
+G2B
+9
+G2B 2026.05.30 13:23  #   
+I deposited funds to my QQ account on 5/5 and as of 5/28 my account is up about 20%. One thing I've noticed is that QQ does not force trades every day. It waits patiently for the right set up before entering, which I actually appreciate. Someone compared it to the sniper, and I think that description fits well. If you are looking for constant daily trades, QQ probably is not the right strategy for you. I have been using it for a little over 3 weeks, and so far I am happy with the results and excited to see how it performs over the coming months. QQ allows for change in settings according to one's risk tolerance. I set my to low to minimize the risk while learning the mechanism behind QQ. Someone with different settings may have different experience than me.
+Dong Phan
+140
+Dong Phan 2026.05.30 03:50  #   
+You need to wait a couple of days to place some trades, and the EA needs enough room for price movement to work properly
+fxba888
+101
+fxba888 2026.05.29 16:55  #   
+I've backtested Quantum Queen for quite some time and it has performed quite well during the last few years when Gold was quite turbulent. Deployed this EA and it has made a profit of 1.1% in the last 4 days. It's a positive start and hope it performs as well as the backtests. Bogdan is very responsive and supports his product well.
+trdoptions
+34
+trdoptions 2026.05.29 15:53  #   
+I purchased the Quantum Queen MT5 EA about two months ago, and I have to say — it has been one of the best trading investments I've made. From the very first week, I could see that this EA was built with serious thought and precision. The setup process was smooth and straightforward, and it integrated perfectly with my MT5 platform without any technical hiccups. What impressed me most was how consistently it performed across different market conditions. The EA manages trades intelligently, with well-defined entry and exit logic that you can clearly see working in real time. Over the past two months, I've been monitoring its performance closely, and the results have been genuinely impressive. It handles risk management efficiently, avoids overtrading, and keeps drawdowns at a reasonable level — all things that matter a lot to a serious trader. If you're on the fence about this EA, don't hesitate. The Quantum Queen MT5 EA is a solid, reliable tool that delivers real results. I highly recommend it to both beginner and experienced traders looking to automate their trading with confidence!
+Jean Claude
+24
+Jean Claude 2026.05.29 15:29  #   
+I am using QQ for 6 weeks now and I can say that statistics about this EA is TRUE. Excellent team, great discord community and the best EA on market now. Yield so far 25% !!! Godlike ! Kudos to Bogdan for all his genius and patience .
+davidstx
+314
+davidstx 2026.05.29 15:23  #   
+I’ve had a great experience using Quantum Queen. The EA is easy to use, runs smoothly, and has shown consistent profitable performance over the time I have been using it. I especially like the risk management features and the clear setup process, which makes it suitable for both beginners and experienced traders. Bogdan has also been very responsive and helpful whenever I had questions. Overall, Quantum Queen has become a valuable tool in my trading journey, and I would definitely recommend it to anyone looking for an automated trading solution.
+Jassem
+30
+Jassem 2026.05.29 14:27  #   
+19% in the first month. I'll wait another two months. If this great performance continues, I'll quit manual trading. I'm truly relieved from having to monitor the charts.
+Krikor
+20
+Krikor 2026.05.29 13:26  #   
+I've been running Quantum Queen for 2 months now and the results have been genuinely impressive: a net return of +50% with a maximum drawdown of only 4.42%. The risk/reward ratio here is something else entirely. What stands out most is the discipline of the system — it doesn't trade for the sake of trading. It waits for the right conditions, and when they align, it executes with precision. There were quiet days with no trades at all, and learning to trust that process is part of the experience. It pays off. At this price point, Quantum Queen is honestly a no-brainer. When you put the cost next to the kind of returns it's capable of generating, it becomes almost irrelevant — a small one-time investment for what it brings to the table. A special mention to Bogdan, who is genuinely one of the most responsive and dedicated developers I've come across. He listens to his users, takes feedback seriously, and is constantly working to improve the EA. The Discord server is a great bonus too — the support and FAQ there are thorough and well-organized, making onboarding and troubleshooting a smooth experience. Highly recommended for anyone looking for a serious, well-supported algo-trading tool, built with a clear long-term vision — this isn't a quick cash grab, it's a product designed to grow and evolve alongside its users.
+Sanjar Ibragimov
+301
+Sanjar Ibragimov 2026.05.29 12:50  #   
+Пользуюсь советником довольно давно, примерно год. Упор сделан не на количество, а на качество. Поэтому сделок не так много, но все они прибыльные, так как идёт четкий просчет тренда и вход в сделку. Последние две недели принесли 15% прибыли к балансу.
+Gofast420
+19
+Gofast420 2026.05.29 11:51  #   
+I was one of the pessimistic users which were reading through all reviews, comments, watched review videos and challenged AI if QQ as I could belief if its true. I unintentionally bought the EA as it was my first EA purchase and thought: well,.. hope I will get my investment back. I really need to highlight the responsiveness of Bogdan was fast of professional which gave me a proof of previous reviews. Further more I`m happy with the results on medium risk which gave me 25% of the investment back in the last 9 day which I was absolutely not expecting. As I have no long time experience but first results showing a strong EA I can give my recommendation for this EA for its results but also for the quick response of Bogdan (with team).
+Des Tang
+33
+Des Tang 2026.05.29 11:17  #   
+Im new to XauUsd trading and when i came across EAs, I was skeptical. So I did a lot of research, read up on reviews and did a lot of backtesting. When I came across Quantum Queen, I just tried sending a message to Bogdan with any doubts or questions I had and he was always so responsive and patient with me. I knew if I were to buy an EA, I will only invest in the best and that is Quantum Queen. No regrets after the sale, he will ensure we set up our EAs correctly so we can start making money. Its been a month, I have only positive feedbacks. My account is making money, Bogdan still answers any questions I have and his EA has regular updates to make it even more reliable. For buyers out there still deciding which to buy, buy Quantum Queen.
+108494
+69
+108494 2026.05.29 09:56  #   
+ボグダン氏のサポートに感謝します。私は日本人ですが、日本人にとって英語は苦手です。コミュニケーションをとることが翻訳なしでは難しい。私はＥＡを購入してから、約２か月間１回も取引がありませんでした。これは、おかしいと思い、ボグダン氏に連絡をしました、彼は、日本人の私にたいして、献身的にサポートしてもらいました。私の設定がうまくいってないことが、原因だったのですが、設定で大事なことはブローカーです。わたしは、別のブローカーそ使っていたので、ＥＡが動作しなかったのです。ボグダン氏のいうとおりＶＴmakesに設定しなおしました。また、設定も、日本円では、Fixedを使用しなければなりません。あとは、資金に合わせてリスクレベルを調整することです。ここで日本人にとってこのＥＡが正しく動作するためには、ＶＴmakesに口座を開くこと。苦手な英語を読みながら、試行錯誤することです。ボグダン氏のサポートは素晴らしく、すぐに返事をもらうことができました。素晴らしい。今日、初めてＥＡが利益をだしてくれました。他のＥＡも試験しましたが、不安要素が多く、使用できません。Quantum Queenは、安心してしようできそうです。本当にボグダン氏ありがとう。
+Gehz
+20
+Gehz 2026.05.29 05:54  #   
+I would like to express my huge gratitude to Bogdan for his Quantum Queen EA. The robot truly delivers high-quality and well-thought-out trading. You can clearly see how much experience and effort has been invested into it. What I especially like is that trades are not opened randomly, but only when market conditions meet strong setup requirements. During the time I’ve been using it, the EA has shown itself to be stable and reliable. I’m very impressed with the trading logic, trade management, and the overall quality of the system. Quantum Queen is one of the very few robots that is actually enjoyable to use in real trading. I would also like to specifically mention Bogdan himself — he is always available, answers any questions, and genuinely helps with everything you need. It’s very rare to find this kind of support after purchasing a product. You can feel that he truly cares not just about selling the EA, but about helping his clients achieve real results. If we talk about ratings, many people give it 5 out of 5, but personally, I would give it 10 out of 10. I’m completely satisfied with both the robot and the support. Definitely recommend Quantum Queen.
+azsxdc70125
+27
+azsxdc70125 2026.05.29 02:22  #   
+After buying this EA, I directly used it on five live accounts for testing, and it has been almost three months now. Although this is my first EA, I can confidently say that its performance is the best
+Robson Barbara Lustosa
+128
+Robson Barbara Lustosa 2026.05.28 21:34  #   
+Bot com poucas entradas, mas entradas mais seletivas e muito assertivas. consistente focado em qualidade nao em quantidade. Recomendo
+Thomas Balli
+22
+Thomas Balli 2026.05.28 20:05  #   
+Quantum Queen is a very efficient EA I recommend
+60267895
+83
+60267895 2026.05.28 19:12  #   
+I recently bought Quantum Queen. Initially, I was a bit skeptical because the AI ​​doesn't trade much, but when the market is right, it comes out of the woodwork and acts like a sniper. The profits are definitely there, and I'm happy with them. I'll post a screenshot of today's trading, for example, even though it's not over yet!
+luca1986
+62
+luca1986 2026.05.28 18:39  #   
+After testing multiple EAs and searching for a truly reliable system, I can confidently say that Quantum Queen operates on a completely different level. This isn't your typical mindless Martingale bot that overtrades; it’s a highly disciplined, professional tool that patiently waits for the absolute best market conditions before executing a trade. The execution is incredibly smooth, and the drawdown has remained remarkably low. While you might see small negative positions occasionally, it's clear that this is just part of its intelligent grid management—the overall cycle consistently closes in profit. Beyond the stellar performance, Bogdan’s support is truly outstanding. He is deeply involved, constantly refining the algorithms, and always quick to answer questions with genuine care. If you want to stop overtrading and invest in a system built with real logic and precision, Quantum Queen is absolutely worth it. Highly recommended!
+david23911128
+26
+david23911128 2026.05.28 17:24  #   
+Bought QQ on 5/25 Patiently waited and trusted QQ. The QQ that was accumulating energy opened trades on 5/29, and almost none of the trade orders had drawdowns. I also used the TMGM BROKER that Bogdan recently recommended, and overall it left me very satisfied!! QQ is definitely not an EA that constantly opens positions with a mindless Martingale strategy. You have to trust it — it only takes action when it’s confident!
+
+
+My experience after buying Quantum Queen — important warning for new buyers
+I bought Quantum Queen because the public presentation, the 2300%+ growth figure, the positive comments, and the screenshots created the impression that this was a very strong and valuable EA.
+After using it and reviewing the official signal history, my opinion changed completely.
+I am not saying the EA never makes money. It can make money in some market conditions. But for me, the real practical value does not justify the price or the expectations created around it.
+The official signal numbers should be studied carefully. Based on the latest signal history I reviewed, the account shows approximately:
+Initial deposit: 100 USD
+Total deposits: 7,210.68 USD
+Total withdrawals: 9,625 USD
+Trading net profit after commissions and swaps: around 3,662 USD
+Final balance/equity: around 1,248 USD
+So when buyers see 2300% growth, they should not understand it as simple clean account growth. They must check the deposits, withdrawals, equity, net profit, lot sizes, drawdown, and exposure behind that number.
+This is where I believe many buyers can get the wrong impression.
+The latest signal history also shows what disappointed me most: weak and irregular activity. In May, the EA traded only on a few isolated days, and the last visible activity was around May 20. The profit for May was modest after costs. For an EA sold at this price, this is not impressive to me.
+Quantum Queen is a Grid/Recovery EA. I know this is mentioned, and I am not saying it was hidden. My point is that buyers must understand what it means in practice. A recovery system can look good for a long time, make withdrawals, and still carry serious risk when gold moves strongly in one direction.
+The signal history also shows periods of much higher lot exposure than a conservative model such as 0.01 lot per 500 USD balance. There are larger lot sizes in the history, including 0.07, 0.08, 0.14, 0.16, 0.28, and even 0.50 lot. Buyers should ask themselves how much of the performance came from higher exposure, not from low-risk stable trading.
+Recent updates added useful options like comments, trading-day controls, Buy/Sell direction settings, and grid-closure changes. But these updates do not answer the main question:
+Does the real practical performance justify the high price and the recovery risk?
+For me, the answer is no.
+About the refund: a refund was offered, but I was asked to remove my negative review before receiving payment. I did not reject a fair solution. I rejected an unbalanced process where I had to do my part first while the payment was still pending.
+My conclusion is simple:
+Quantum Queen can make money sometimes.
+But that is not enough for me.
+It does not make the EA fairly priced.
+It does not remove recovery risk.
+It does not erase long inactive periods.
+It does not make the 2300% growth figure clear enough for new buyers.
+It does not make the public hype match the real practical value I experienced.
+Before buying, do not rely on positive comments, screenshots, or the headline growth number. Download the official signal history yourself. Check deposits, withdrawals, equity, net profit after costs, lot sizes, drawdown, deposit load, inactivity periods, and recovery behavior.
+If I had understood all of this before buying, I would not have paid this price.
+After my live usage and reviewing the official data, I cannot recommend Quantum Queen to buyers who do not fully understand Grid/Recovery risk and the difference between MQL5 growth and real practical return.
+ملاحظة للإخوة العرب:
+أكتب هذا الجزء بلغتي الأم حتى يكون كلامي واضحاً وطبيعياً. أنا اشتريت كوانتوم كوين وجربته بنفسي، ومشكلتي ليست أن الروبوت لا يربح أبداً. نعم، يربح أحياناً. لكن بعد التجربة ومراجعة سجل الإشارة، وجدت أن الأداء العملي لا يبرر السعر ولا الضجة حوله.
+الروبوت قد يبقى خاملاً أياماً طويلة، ثم عندما يدخل تكون الأرباح غالباً بسيطة مقارنة بالانتظار والمخاطرة. آخر مثال عندي: بعد انتظار يقارب 8 أيام، فتح عدة صفقات على حساب قريب من 500 دولار وحقق تقريباً 16 دولار فقط. كل شخص يستطيع حساب النسبة حسب رصيده، لكن بالنسبة لي هذا النوع من الأداء لا يستحق كل هذا التطبيل.
+لا تنخدعوا برقم النمو الكبير وحده. راجعوا سجل الإشارة الرسمي بأنفسكم: الإيداعات، السحوبات، الإيكويتي، اللوتات، الدرو داون، وفترات الخمول. الصورة ليست دائماً كما تبدو من التعليقات الإيجابية أو لقطات الشاشة.
+وأيضاً، انظروا إلى طريقة الرد على أي انتقاد. بدلاً من نقاش هادئ بالأرقام، كثير من الردود تحولت إلى سخرية، اتهامات، وهجوم شخصي. أنا أيضاً تم إخراجي من قناة ديسكورد بعدما انتقدت أداء الروبوت.
+لو كنت أعرف هذه التفاصيل قبل الشراء، لما دفعت هذا السعر. نصيحتي للمشتري العربي: لا تعتمد على كلامي ولا على كلام المدافعين. افتح السجل الرسمي، احسب بنفسك، ثم قرر.
+Bogdan Ion Puscasu
+66639
+Reply from developer Bogdan Ion Puscasu 2026.05.18 11:17 #
+Hello, First of all, thank you for taking the time to write such a detailed review. I would like to address each important point honestly and transparently. 1. Trading Frequency & Inactivity Please note that Quantum Queen, is designed to focus on high-quality trading opportunities rather than trading frequently. This means the EA will only open trades when the market conditions meet its strict strategy rules. As a result, there may be days with no trades at all, and other days with more trading activity, depending entirely on the quality of the setups available in the market. This is completely normal and actually a key strength of the strategy. The EA is designed to avoid unnecessary trades and wait patiently for the best setups, which helps reduce risk and protect the account over the long term.
+In professional trading, not trading is often the best decision when market conditions are not favorable. 2. “The EA traded after I complained” I want to be completely clear here: Quantum Queen is fully autonomous. I do not manually trigger trades, remotely control user accounts, or interfere with EA execution in any way. The timing you mentioned is purely coincidental and likely connected to market conditions aligning shortly after your messages. I understand why the timing may have appeared unusual from your perspective, but there is no manual intervention mechanism behind the EA. 3.Recovery / Averaging Behavior Quantum Queen is based on an advanced trend-following GRID strategy and it can open multiple positions in the same direction and close the cycle during retracements with an overall net profit. This behavior is fully intentional and part of the strategy design. It is also one of the reasons why the EA has achieved such strong long-term live results over time, as you can see in the live signal statistics. It has reached 2300% growth in 26 months of live trading https://www.mql5.com/en/signals/2234595?source=Site+Signals+My 4. Risk Settings
+I never “forced” you to use 50% risk. Quantum Queen gives users full freedom to choose between multiple risk levels and DD control modes, depending on their personal tolerance and account goals. Higher risk settings naturally produce higher returns but also higher drawdowns. Lower risk settings reduce both risk and profitability. This is standard across all leveraged trading systems. Risk management always remains the responsibility of the user. 5. Lot Sizing
+You mentioned that your expected setting was 0.01 lots per $500 balance and with a $2000 starting balance the EA should have opened with 0.04 lots. Since it opened with just 0.01 lots, it means you did not set it up correctly. I can help you review your settings and make sure everything is installed correctly. I can even help you remotely via Anydesk. 6. Discord Community I’m sorry if your experience with some community members felt unpleasant. I always encourage respectful discussion and constructive feedback inside the community. At the same time, I cannot fully control how every individual user reacts emotionally during discussions about trading performance. 7. Quantum Athena & Development Focus Quantum Athena was not created as a replacement for Quantum Queen, nor does it reduce the support or development effort behind Queen. I'm dedicated to my work and I'm always looking for ways to improve the strategies and update my EAs to be relevant to the ever changing market conditions. Quantum Queen remains my flagship EA and continues receiving active development, updates, optimization, and support. 8. Overall Performance and Expectations Quantum Queen has over 2 years of verified live history, strong long-term statistics, and the highest reputations on the entire MQL5, being used succesfuly by thousands of satisfied customers. That does not mean every short-term period will feel comfortable or perfectly match every user’s expectations. All trading systems experience cycles, including periods of lower activity, drawdowns, or slower growth. Two months is still a relatively small sample size when evaluating a long-term algorithmic strategy. I fully respect your right to share your experience, but I also believe the review presents several assumptions and conclusions that do not fully reflect the actual structure, transparency, and intended behavior of the EA. At the same time, I also feel that a 1 star rating is extremely harsh considering that such ratings are generally associated with products that are broken, non-functional, full of bugs, abandoned, or lacking support, which is clearly not the case here.
+Fabio Quantumless
+397
+Fabio Quantumless 2025.10.08 08:17  #   
+I’ve been using QQ and other EAs from Bogdan for a few months now, not just a few days like most of the so-called reviewers here. This is based on real experience, not another “thanks for the free EA” kind of review. My only purpose here is to give an honest opinion. Unlike most of the five-star reviews you see, written by people just trying to get another “gift” EA (usually QS, which is so bad he literally has to offer 50% off to get anyone to buy it), I’m not doing this for a reward. When I first saw all those glowing reviews, I got fooled too. I didn’t realize why until I joined his Discord and saw his moderators asking people to post good reviews in exchange for gifts and bonuses. So now you know how the five-star magic happens. Bogdan’s real money doesn’t come from trading. It comes from selling his EAs. And I say this because I’ve seen how he trades manually. The ironic part is that he keeps lecturing people about “risk management” every time someone complains about a drawdown. He loves blaming others, telling them it’s their fault for over-risking, while he himself takes the same reckless risks when it suits him. Then came his “MAM opportunity.” Many joined, thinking it would be managed responsibly. What actually happened was one gamble after another, from 40% drawdown to 80%, until he blew around $650K. And when that happened, guess what? He blamed everyone else again. Apparently it was their fault for not adding more money, while he refused to put in his own. Because, let’s be real, selfish people only know how to take, not give.
+An expected GPT answer, with no addressing of my points, and also you I forgot to mention and manipulation of your signals gain in % that you run it on very high risk on few $$ in the beginning and deposit and withdraw to make it much more in %, and if so good why deposit just few k.
+Ask GPT how to answer this one too please.
+Everyone will say is fake review, ask to MAM users too...
+Later edit: I hope you will get better too and stop fooling people...thats sad...and not fake review mine is real...not manipulated..
+Further more you can find Grid System that exactly work the same or even better for 50$
+Bogdan Ion Puscasu
+66639
+Reply from developer Bogdan Ion Puscasu 2025.10.08 14:33 #
+I’m sorry to see a message like this, especially when it’s very clear that your comment doesn’t come from an honest product experience, but from personal frustration and bad intentions. Let me make one thing very clear for everyone reading — I don't really understand "how you got fooled", because Quantum Queen has been performing extremely well, both on the live signal and for hundreds of real users who share their verified results every week. 📈 All the 5-star reviews you see are from real customers, real accounts, and real profits — not from “gifts” or fake feedback.The accusation that moderators “ask for good reviews” in exchange for bonuses is simply false. Nobody is told what to write — people post honest feedback, good or bad. The fact that most reviews are positive says more about the product’s performance than about any imaginary “scheme.” Every user who leaves a review does so based on their own experience, and their success speaks for itself. Regarding the accusations made here, they have absolutely no connection to Quantum Queen --> I always encourage responsible risk management and patience — because that’s what real trading requires, and this is actually a good thing, not a bad one as you try to make out of it. I understand that sometimes people get emotional or upset, but spreading false claims helps no one. The truth is in the data:
+👉 Quantum Queen’s live signal shows over 740% growth, 77% win rate, and consistent results over 19 months of verified live trading. Quantum Queen never had a single losing month. Your negative review is the only one out of hundreds of other genuine reviews, which tell the true story of Quantun Queen. I invite everyone to check the live signal and see the facts for themselves. Let’s keep this space for constructive discussion and for traders who are genuinely interested in Quantum Queen, rather than your personal vendetta against me.
+Later edit: Yes, it's a 100% fake review, and there is nothing to address, because your fake review has nothing to do with Quantum Queen's performance; it's just your hatred that you have inside of you. It's saddening to see some people carrying the weight of so much hate. I hope that you will get better. I wish you all the best.
+Magma Software Solutions UG
+2139
+Markus Magera 2025.07.31 08:24  #   
+High Risk Grid Martingale with no breaks! 13k Account, set up Medium Risk. QQ entered trade with 0.13 lots, ending in 4.23 lots as final position!!!!!!! Got stopped out, cost me nearly 10k on my 13k account! Don't use ANY of bogdans grid martingale EAs, they have no breaks and you will end up blown away!
+Answer to Bogdan:
+I bought this EA before i was a seller and i use it on a private account, so imo i can make a review.
+Your statement that martingale was discontinued in 1.x is wrong, cause i have 2.x here, which as you can see in the screenshots i saved, using martingale!
+i previously lost 40k on wizard, now 10k on queen. So your grid based systems ARE dangerous!
+Bogdan Ion Puscasu
+66639
+Reply from developer Bogdan Ion Puscasu 2025.08.02 11:46 #
+It is important to clarify a few critical points for the sake of transparency and to protect other users from misleading information. You are a seller on the MQL5 Market, and as a seller, to purchase and rate other sellers' products, this constitutes a clear conflict of interest and may be interpreted as spam or manipulation coming from the competition. Your claim refers to "Bogdan's Grid Martingale EAs", yet Quantum Queen has not used a Martingale strategy since version 1.3, which was discontinued in May 2025. The product is currently at version 2.4, with a completely different trend-following engine and no Martingale at all. This review is not only factually incorrect, but appears to be intentionally damaging and manipulative, likely designed to discredit a competitor's product. This behavior is highly unethical and goes against the spirit of fair competition. Additionally, it is easy to look at my signal and see that there is NO MARTINGALE being used since May 2025. At the same time, the signal has been running profitably for more than 16 months already
+LuckyNumberSlevin
+78
+LuckyNumberSlevin 2026.05.19 23:21  #   
+Hi Bogdan: I am sending this review to strongly complain about the change in trading performance and grid management capabilities QQ has had in recent weeks compared to when I firt bought the EA months ago. At first, the performance of QQ was amazingly consistent, solid and standardized. Even when there were weeks where the EA did not performed any trades at all, when operation was resumed the performance was alwayds the same: high accuracy, cero losses, several winning trades per operation. Execution was impecable and precise. But since 6-8 weeks ago, barely any trade has been performed and the grid management process is not the same as before. Sad to say that QQ apprears to be a completely different EA. I do operate in IC Markets and Roboforex, but same performance across the 2 brokers. Not really sure that the broker selection tab make any difference. I used to love your EA, but current performance keeps my evaluation low at this point. Really hope the setbacks can be overcome in the near future. Kind regards Bogdan.
+Bogdan Ion Puscasu
+66639
+Reply from developer Bogdan Ion Puscasu 2026.05.20 00:52 #
+What you are experiencing is unfortunately not related to Quantum Queen itself, but to broker execution quality and slippage issues — especially with IC Markets. This topic has been discussed daily inside our Discord community over the past several weeks, and because of the increasing execution delays and slippage problems, we are no longer recommending IC Markets as a broker for Quantum Queen. The EA is extremely sensitive to execution precision because of the way the entries and grid management system are designed. Even small delays or higher slippage can significantly affect trade frequency and grid behavior. This is why you are seeing differences compared to previous months. Many users who migrated to brokers with faster execution and lower slippage are still experiencing the same stable and consistent performance Quantum Queen has always delivered. Unfortunately, this is not something the EA can control internally, since order execution depends entirely on the broker’s infrastructure. For this reason, I believe your review is unfairly directed at the EA itself, when the real issue comes from broker conditions. If you are unhappy with the execution quality, the review should honestly be aimed at the broker rather than Quantum Queen. I still appreciate your support and hope you will test QQ with one of the currently recommended brokers before making a final judgment. I am confident you will see the difference immediately. Kind regards,
+Bogdan
