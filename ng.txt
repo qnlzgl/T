@@ -1,0 +1,358 @@
+# =====================================================================================================
+# Henry Hub NG calendar-spread carry: download -> backtest -> plot, three variants
+#
+#   S1  A            : short NG c2 / long NG c11, held only when the 8-week change of the EIA storage surplus
+#                      (Lower-48 working gas minus its prior-5-year same-week average) is > 0
+#   S2  A x F        : S1, but flat when the EIA STEO forecast of US gross gas exports (NGEXPUS) for the
+#                      near-leg window (c2 delivery month -1..+1) was revised UP over the last 3 STEO vintages
+#   S3  (A x F) + B  : S2 plus a second book B = short c2 / long c6, held only when NG 30-day ATM implied vol
+#                      (LSEG NGATMIV) is above the 80th percentile of its own history (expanding)
+#
+# Save this file as ng_carry_validation.py and run:   python ng_carry_validation.py
+# Requirements: python 3.10+, pandas, numpy, matplotlib, requests, xlrd (EIA .xls), openpyxl (STEO .xlsx),
+#               lseg-data (LSEG Data Library, needs Workspace running + logged in, or a platform session)
+#
+# Conventions (same as the research):
+#   * 1 lot = 10,000 MMBtu per leg, PnL in USD. Cost = 1 tick (0.001 $/MMBtu) per leg per lot for every roll
+#     and every change in position.
+#   * Hold-and-roll nearbies: the k-th nearby rolls 1 trading day before the contract's last trading day
+#     (NG LTD = 3 business days before the first calendar day of the delivery month).
+#   * move_t = settle_t - settle_{t-1} of the SAME contract (tradable, no back-adjustment).
+#   * A position decided with information released on day D earns from the settle of D onwards, i.e. it is
+#     equivalent to trading at D's settlement (TAS on the release day). EIA storage comes out Thursday 10:30 ET.
+#     If you can only trade the NEXT day, set EXTRA_LAG_DAYS = 1.
+#   * IS = 2010-2024, OOS = 2025 -> latest.
+#
+# Expected (research run, data to 2026-11-02, EXTRA_LAG_DAYS = 0):
+#                    IS Sharpe  OOS Sharpe  full Sharpe  max DD 2010+   PnL 2010+
+#   original 2-6       0.62       -0.34        0.53        -19.6k        73.6k
+#   S1 A               0.71        0.99        0.74        -13.0k        94.9k
+#   S2 A x F           0.81        0.85        0.80         -8.0k        66.8k
+#   S3 (A x F) + B     0.88        0.93        0.88        -19.0k       151.4k
+# Small differences can come from holiday calendars / LSEG revisions.
+# =====================================================================================================
+from __future__ import annotations
+
+import io
+import time
+from datetime import date
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import requests
+from pandas.tseries.holiday import (AbstractHolidayCalendar, GoodFriday, Holiday, USLaborDay, USMartinLutherKingJr,
+                                    USMemorialDay, USPresidentsDay, USThanksgivingDay, nearest_workday)
+
+OUT = Path("ng_carry_data")
+OUT.mkdir(exist_ok=True)
+LOT, TICK = 10_000, 0.001
+FIRST_CONTRACT, PRICE_START = "2008-01", "2007-01-01"
+EXTRA_LAG_DAYS = 0
+IS, OOS = ("2010-01-01", "2024-12-31"), ("2025-01-01", "2030-12-31")
+MCODE = "FGHJKMNQUVXZ"
+UA = {"User-Agent": "Mozilla/5.0"}
+
+
+# ----------------------------------------------------------------------------- 1. download: LSEG
+def lseg_session():
+    import lseg.data as ld
+    ld.open_session()          # Workspace desktop session; replace with your platform session if needed
+    return ld
+
+
+def ng_rics(year: int, month: int) -> list[str]:
+    """Candidate RICs: live contracts resolve only as NGZ26, expired ones only as NGZ26^2 (2018+) / NGZ7^1 (pre-2018)."""
+    m, d = MCODE[month - 1], year // 10 - 200
+    yy = f"{year % 100:02d}"
+    old = f"NG{m}{year % 10}^{d}" if year < 2018 else f"NG{m}{yy}^{d}"
+    return [f"NG{m}{yy}", old]
+
+
+def download_contracts(ld) -> pd.DataFrame:
+    f = OUT / "ng_contract_settles.csv"
+    if f.exists():
+        return pd.read_csv(f, index_col=0, parse_dates=True)
+    end = date.today().strftime("%Y-%m-%d")
+    cols = {}
+    for p in pd.period_range(FIRST_CONTRACT, pd.Period(date.today(), "M") + 36, freq="M"):
+        for ric in ng_rics(p.year, p.month):
+            try:
+                d = ld.get_history(universe=[ric], fields=["SETTLE"], start=PRICE_START, end=end, interval="daily")
+            except Exception:
+                continue
+            if d is not None and len(d.dropna(how="all")):
+                s = pd.to_numeric(d.iloc[:, 0], errors="coerce").dropna()
+                s.index = pd.to_datetime(s.index)
+                cols[f"{MCODE[p.month - 1]}{p.year % 100:02d}"] = s
+                print("  ", ric, len(s), s.index[-1].date())
+                break
+        time.sleep(0.2)
+    px = pd.DataFrame(cols).sort_index()
+    px.to_csv(f)
+    return px
+
+
+def download_atm_iv(ld) -> pd.DataFrame:
+    f = OUT / "ngatmiv.csv"
+    if f.exists():
+        return pd.read_csv(f, index_col=0, parse_dates=True)
+    parts = []
+    for a, b in (("2000-01-01", "2007-12-31"), ("2008-01-01", "2015-12-31"), ("2016-01-01", "2022-12-31"),
+                 ("2023-01-01", date.today().strftime("%Y-%m-%d"))):
+        try:
+            parts.append(ld.get_history(universe=["NGATMIV"], start=a, end=b))
+        except Exception as e:
+            print("  NGATMIV", a, str(e)[:80])
+    d = pd.concat(parts)
+    d.index = pd.to_datetime(d.index)
+    d = d[~d.index.duplicated()].sort_index().apply(pd.to_numeric, errors="coerce")
+    d.to_csv(f)
+    return d
+
+
+# ----------------------------------------------------------------------------- 2. download: EIA (public, no key)
+def download_storage() -> pd.DataFrame:
+    """Weekly Lower-48 working gas (Bcf). 2010+ from ngsHistory.xls, 1994-2009 from the 3-region archive."""
+    f = OUT / "eia_storage.csv"
+    if f.exists():
+        return pd.read_csv(f, index_col=0, parse_dates=True)
+    new = pd.read_excel(io.BytesIO(requests.get("https://ir.eia.gov/ngs/ngsHistory.xls", headers=UA, timeout=60).content),
+                        sheet_name=0, header=None, skiprows=7)
+    new.columns = ["week", "src", "east", "midwest", "mountain", "pacific", "sc", "salt", "nonsalt", "total"]
+    new = new[pd.to_datetime(new["week"], errors="coerce").notna()]
+    new = new.set_index(pd.to_datetime(new["week"]))["total"].astype(float)
+    old = pd.read_excel(io.BytesIO(requests.get("https://ir.eia.gov/ngs/archngshistory.xls", headers=UA, timeout=60).content),
+                        sheet_name=0, header=None, skiprows=8)
+    old.columns = ["week", "src", "east", "west", "producing", "salt", "nonsalt", "total"][: old.shape[1]]
+    old = old[pd.to_datetime(old["week"], errors="coerce").notna()]
+    old = pd.to_numeric(old.set_index(pd.to_datetime(old["week"]))["total"], errors="coerce")
+    old = old[old.index < new.index[0]]
+    w = pd.concat([old, new]).sort_index().rename("total").to_frame()
+    w.to_csv(f)
+    return w
+
+
+def download_steo() -> dict[pd.Period, pd.Series]:
+    """US gross gas exports NGEXPUS (Bcf/d by month) from every archived STEO vintage, table 5a."""
+    d = OUT / "steo"
+    d.mkdir(exist_ok=True)
+    mons = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+    out = {}
+    for p in pd.period_range("2008-04", pd.Period(date.today(), "M"), freq="M"):
+        stem = f"{mons[p.month - 1]}{p.year % 100:02d}_base"
+        got = [x for x in d.glob(stem + ".xls*")]
+        if not got:
+            for ext in ("xlsx", "xls"):
+                r = requests.get(f"https://www.eia.gov/outlooks/steo/archives/{stem}.{ext}", headers=UA, timeout=60)
+                if r.ok and len(r.content) > 10_000:
+                    (d / f"{stem}.{ext}").write_bytes(r.content)
+                    got = [d / f"{stem}.{ext}"]
+                    break
+                time.sleep(0.3)
+        if not got:
+            continue
+        try:
+            t = pd.read_excel(got[0], sheet_name="5atab", header=None)
+        except Exception as e:
+            print("  STEO parse", got[0].name, str(e)[:60])
+            continue
+        y0 = int(t.iat[2, 2])
+        months = pd.period_range(f"{y0}-01", periods=t.shape[1] - 2, freq="M")
+        codes = t.iloc[:, 0].astype(str).str.strip()
+        if (codes == "NGEXPUS").any():
+            gx = pd.to_numeric(t.loc[codes == "NGEXPUS"].iloc[0, 2:], errors="coerce").values
+        else:
+            gx = (pd.to_numeric(t.loc[codes == "NGEXPUS_LNG"].iloc[0, 2:], errors="coerce").values
+                  + pd.to_numeric(t.loc[codes == "NGEXPUS_PIPE"].iloc[0, 2:], errors="coerce").values)
+        out[p] = pd.Series(gx, index=months)
+    print(f"  STEO vintages parsed: {len(out)}")
+    return dict(sorted(out.items()))
+
+
+# ----------------------------------------------------------------------------- 3. hold-and-roll nearbies
+class NymexCal(AbstractHolidayCalendar):
+    rules = [Holiday("NewYear", month=1, day=1, observance=nearest_workday), USMartinLutherKingJr, USPresidentsDay,
+             GoodFriday, USMemorialDay, Holiday("Juneteenth", month=6, day=19, start_date="2022-01-01", observance=nearest_workday),
+             Holiday("July4", month=7, day=4, observance=nearest_workday), USLaborDay, USThanksgivingDay,
+             Holiday("Christmas", month=12, day=25, observance=nearest_workday)]
+
+
+BDAY = pd.offsets.CustomBusinessDay(calendar=NymexCal())
+
+
+def ng_ltd(code: str) -> pd.Timestamp:
+    first = pd.Timestamp(2000 + int(code[1:]), MCODE.index(code[0]) + 1, 1)
+    return first - 3 * BDAY
+
+
+def nearby(px: pd.DataFrame, k: int, roll_days: int = 1) -> pd.DataFrame:
+    idx = px.index
+    order = sorted(px.columns, key=lambda c: (int(c[1:]), MCODE.index(c[0])))
+    cutoff = {}
+    for c in order:
+        ltd = ng_ltd(c)
+        if ltd > idx[-1]:
+            cutoff[c] = ltd
+            continue
+        j = idx.searchsorted(ltd, side="right") - 1
+        cutoff[c] = idx[max(0, j - roll_days)] if j >= 0 else None
+    rows = []
+    prev = None
+    for dt in idx:
+        row = px.loc[dt]
+        avail = [c for c in order if pd.notna(row[c]) and cutoff[c] is not None and dt <= cutoff[c]]
+        if len(avail) < k:
+            rows.append(("", np.nan, 0.0))
+        else:
+            c = avail[k - 1]
+            mv = 0.0 if prev is None or pd.isna(prev[c]) else row[c] - prev[c]
+            rows.append((c, row[c], mv))
+        prev = row
+    return pd.DataFrame(rows, index=idx, columns=["c", "p", "m"])
+
+
+def spread_pnl(L: dict, near: int, far: int, pos: pd.Series | None = None) -> pd.Series:
+    a, b = L[near], L[far]
+    d = a.join(b, lsuffix="n", rsuffix="f", how="inner")
+    d = d[(d.cn != "") & (d.cf != "")]
+    q = pd.Series(1.0, index=d.index) if pos is None else pos.reindex(d.index).fillna(0.0)
+    gross = (-d.mn + d.mf) * LOT * q
+    roll = ((d.cn != d.cn.shift()) | (d.cf != d.cf.shift())).astype(float)
+    roll.iloc[0] = 0
+    trade = (q - q.shift()).abs().fillna(0) + roll * (q + q.shift().fillna(0))
+    return (gross - 2 * trade * TICK * LOT).rename("pnl")
+
+
+# ----------------------------------------------------------------------------- 4. signals
+def five_year_mean(s: pd.Series) -> pd.Series:
+    out = pd.Series(np.nan, index=s.index)
+    idx = s.index
+    for i, d in enumerate(idx):
+        vals = []
+        for k in range(1, 6):
+            t = d - pd.DateOffset(years=k)
+            j = idx.get_indexer([t], method="nearest")[0]
+            if j >= 0 and abs((idx[j] - t).days) <= 4 and j < i:
+                vals.append(s.iat[j])
+        if len(vals) == 5:
+            out.iat[i] = np.mean(vals)
+    return out
+
+
+def storage_gate(w: pd.DataFrame, idx: pd.DatetimeIndex) -> pd.Series:
+    """A: 1 when the 8-week change of (storage - prior-5y same-week average) > 0, else 0.
+    Report for week ending Friday W is released Thursday W+6 (pre-2010: W+7 to be conservative); the value is used
+    from the first trading day strictly after the release, i.e. it earns from the release-day settle."""
+    dev = w["total"] - five_year_mean(w["total"])
+    ddev8 = dev - dev.shift(8)
+    rel = w.index + pd.to_timedelta(np.where(w.index.year >= 2010, 6, 7), unit="D")
+    j = np.searchsorted(rel.values, idx.values, side="left") - 1
+    sig = pd.Series(np.where(j >= 0, ddev8.values[np.clip(j, 0, None)], np.nan), index=idx)
+    return pd.Series(np.where(sig > 0, 1.0, 0.0), idx).where(sig.notna(), 1.0)
+
+
+def export_filter(v: dict, near_contract: pd.Series) -> pd.Series:
+    """F: 1 unless the STEO NGEXPUS forecast averaged over (c2 delivery month -1..+1) was revised up in total over the
+    last 3 vintage-to-vintage revisions. Vintage of month m usable from the 16th (Oct-2013: 23rd); applied next day."""
+    keys = list(v)
+    rel = pd.DatetimeIndex([pd.Timestamp(p.year, p.month, 23 if (p.year, p.month) == (2013, 10) else 16) for p in keys])
+    idx = near_contract.index
+    vi = np.searchsorted(rel.values, idx.values, side="right") - 1
+    tab = pd.DataFrame(v)
+    cache, out = {}, np.full(len(idx), np.nan)
+    for j, (i, c) in enumerate(zip(vi, near_contract.values)):
+        if i < 3 or not c:
+            continue
+        a = pd.Period(year=2000 + int(c[1:]), month=MCODE.index(c[0]) + 1, freq="M")
+        if (i, a) not in cache:
+            win = pd.period_range(a - 1, a + 1, freq="M")
+            revs = [tab[keys[k]].reindex(win).mean() - tab[keys[k - 1]].reindex(win).mean() for k in range(i - 2, i + 1)]
+            cache[(i, a)] = sum(revs)
+        out[j] = cache[(i, a)]
+    bad = pd.Series(out, index=idx) > 0
+    return (~bad).astype(float).shift(1).fillna(1.0)
+
+
+def iv_gate(iv: pd.DataFrame, idx: pd.DatetimeIndex) -> pd.Series:
+    """B: 1 when 30D ATM IV (avg of call/put) expanding percentile (min 126 obs) > 0.8; known at close, applied next day."""
+    i30 = iv[["30D_A_IM_C", "30D_A_IM_P"]].mean(axis=1).ffill()
+    pct = i30.expanding(126).rank(pct=True)
+    sig = (pct > 0.8).astype(float)
+    return sig.reindex(idx.union(sig.index)).ffill().reindex(idx).shift(1).fillna(1.0)
+
+
+def lag(pos: pd.Series, n: int) -> pd.Series:
+    return pos.shift(n).fillna(1.0) if n else pos
+
+
+# ----------------------------------------------------------------------------- 5. stats + plot
+def stats(p: pd.Series, a: str, b: str) -> tuple[float, float, float]:
+    q = p.loc[a:b]
+    c = q.cumsum()
+    return np.sqrt(252) * q.mean() / q.std(), (c - c.cummax()).min(), c.iloc[-1]
+
+
+def report_and_plot(S: dict[str, pd.Series]) -> None:
+    D = pd.DataFrame(S).fillna(0)["2010":]
+    rows = []
+    for k, p in D.items():
+        a, b, f = stats(p, *IS), stats(p, *OOS), stats(p, IS[0], OOS[1])
+        rows.append({"strategy": k, "IS_sharpe": a[0], "OOS_sharpe": b[0], "full_sharpe": f[0], "maxDD_2010+": f[1],
+                     "PnL_2010+": f[2], "OOS_PnL": b[2], "time_in_market": (p != 0).mean()})
+    T = pd.DataFrame(rows).set_index("strategy")
+    pd.set_option("display.width", 200)
+    print(T.round(2).to_string())
+    T.to_csv(OUT / "results.csv")
+    D.to_csv(OUT / "daily_pnl.csv")
+    fig, ax = plt.subplots(2, 1, figsize=(12, 8.5), sharex=True, height_ratios=[3, 2])
+    for (k, p), c in zip(D.items(), ["#9ca3af", "#1a6fc8", "#0f766e", "#7c3aed"]):
+        cum = p.cumsum() / 1e3
+        ax[0].plot(cum.index, cum, color=c, lw=1.6, label=f"{k}  IS {T.loc[k, 'IS_sharpe']:.2f} | OOS {T.loc[k, 'OOS_sharpe']:.2f}")
+        ax[1].plot(cum.index, cum - cum.cummax(), color=c, lw=1.1)
+    for a in ax:
+        a.axvspan(pd.Timestamp(OOS[0]), D.index[-1], color="#f3f4f6", zorder=0)
+        a.grid(alpha=0.25)
+    ax[0].set_ylabel("Cumulative PnL (USD k, 1 lot/leg)")
+    ax[1].set_ylabel("Drawdown (USD k)")
+    ax[0].legend(frameon=False, fontsize=9, loc="upper left")
+    ax[0].set_title("NG carry: original 2-6 vs S1 / S2 / S3 (shaded = out of sample)")
+    fig.tight_layout()
+    fig.savefig(OUT / "ng_carry_validation.png", dpi=120)
+    print("saved", OUT / "results.csv", OUT / "daily_pnl.csv", OUT / "ng_carry_validation.png")
+
+
+# ----------------------------------------------------------------------------- 6. main
+def main() -> None:
+    print("1/5 LSEG: NG contract settles + NGATMIV")
+    ld = lseg_session()
+    try:
+        px = download_contracts(ld)
+        iv = download_atm_iv(ld)
+    finally:
+        ld.close_session()
+    print("2/5 EIA: weekly storage + STEO vintages")
+    w = download_storage()
+    v = download_steo()
+    print("3/5 building nearbies c2, c6, c11")
+    L = {k: nearby(px, k) for k in (2, 6, 11)}
+    print("4/5 signals + backtest")
+    base26 = spread_pnl(L, 2, 6)
+    idx11 = spread_pnl(L, 2, 11).index
+    A = lag(storage_gate(w, idx11), EXTRA_LAG_DAYS)
+    F = lag(export_filter(v, L[2].c.reindex(idx11)), EXTRA_LAG_DAYS)
+    B = lag(iv_gate(iv, base26.index), EXTRA_LAG_DAYS)
+    S = {"original 2-6": base26,
+         "S1 A (2-11 storage gate)": spread_pnl(L, 2, 11, pos=A),
+         "S2 A x export filter": spread_pnl(L, 2, 11, pos=A * F),
+         "S3 (A x F) + B": spread_pnl(L, 2, 11, pos=A * F).add(spread_pnl(L, 2, 6, pos=B), fill_value=0)}
+    print("   latest positions:", {"A": A.iloc[-1], "F": F.iloc[-1], "B": B.iloc[-1]}, "as of", idx11[-1].date())
+    print("5/5 results + plot")
+    report_and_plot(S)
+
+
+if __name__ == "__main__":
+    main()
